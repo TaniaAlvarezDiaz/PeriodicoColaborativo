@@ -1,0 +1,44 @@
+
+<section class="uk-section">
+    <div class="uk-container">
+        <div class="uk-overflow-auto">
+            <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
+                <thead>
+                <tr>
+                    <th class="uk-table-expand">Titulo</th>
+                    <th class="uk-width-small">Precio</th>
+                    <th class="uk-width-small">Opciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each anuncios}}
+                <tr>
+                    <td >{{ titulo }}</td>
+                    <td >{{ precio }}</td>
+                    <td>
+                        <a class="uk-link" href="/anuncio/{{_id}}/modificar">
+                            <span  uk-icon="pencil"></span>
+                            Modificar
+                        </a> <br>
+                        <a class="uk-link" href="/anuncio/{{_id}}/eliminar">
+                            <span  uk-icon="trash"></span>
+                            Eliminar
+                        </a>
+                    </td>
+                </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+
+        <ul class="uk-pagination uk-flex-center" uk-margin>
+            {{#each paginas}}
+
+                <li class="{{ clase }}">
+                    <a href="/misanuncios?pg={{valor}}">{{valor}}</a>
+                </li>
+
+            {{/each}}
+        </ul>
+    </div>
+</section>

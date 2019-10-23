@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Wallapap</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="/css/uikit.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="/js/uikit.js"></script>
+    <script src="/js/uikit-icons.js"></script>
+</head>
+<body>
+
+<div class="uk-panel uk-padding uk-background-secondary uk-light">
+    <a class="uk-logo" href="#">Logo</a>
+</div>
+
+<nav class="uk-navbar uk-navbar-container uk-margin">
+    <div class="uk-navbar-left">
+
+        <a class="uk-navbar-item uk-logo" href="#">Logo</a>
+
+        <ul class="uk-navbar-nav">
+            <li class="uk-active"><a href="#">Active</a></li>
+            <li><a href="#">Item</a></li>
+        </ul>
+
+    </div>
+    <div class="uk-navbar-right">
+
+        <a class="uk-navbar-toggle" href="#modal-full" uk-search-icon uk-toggle></a>
+
+    </div>
+</nav>
+
+<div id="modal-full" class="uk-modal-full uk-modal" uk-modal>
+    <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
+        <button class="uk-modal-close-full" type="button" uk-close></button>
+        <form class="uk-search uk-search-large">
+            <input class="uk-search-input uk-text-center" type="search" placeholder="Search..." autofocus>
+        </form>
+    </div>
+</div>
+
+
+<button class="uk-button uk-button-default" type="button">Hover</button>
+<div uk-dropdown>
+    <ul class="uk-nav uk-dropdown-nav">
+        <li class="uk-active"><a href="#">Active</a></li>
+        <li><a href="#">Item</a></li>
+        <li class="uk-nav-header">Header</li>
+        <li><a href="#">Item</a></li>
+        <li><a href="#">Item</a></li>
+        <li class="uk-nav-divider"></li>
+        <li><a href="#">Item</a></li>
+    </ul>
+</div>
+
+<nav class="uk-navbar-container" uk-navbar>
+    <div class="uk-navbar-left">
+
+        <div class="uk-navbar-item">
+            <form class="uk-search uk-search-navbar">
+                <span uk-search-icon></span>
+                <input class="uk-search-input" type="search" placeholder="Search...">
+            </form>
+        </div>
+
+    </div>
+</nav>
+
+<!-- Barra de Navegación superior -->
+<nav class="uk-navbar-container">
+    <div class="uk-tile uk-tile-default">Wallapap</div>
+    <ul class="uk-iconnav">
+        <li><a href="" uk-icon="icon: check">Inicio</a></li>
+        <li><a href="" uk-icon="icon: check">Comprar</a></li>
+    </ul>
+</nav>
+
+
+<!-- Slideshow -->
+<div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="animation: fade">
+
+    <ul class="uk-slideshow-items">
+        <li>
+            <img src="images/photo.jpg" alt="" uk-cover>
+            <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
+                <h3 class="uk-margin-remove">Bottom</h3>
+                <p class="uk-margin-remove">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </li>
+        <li>
+            <img src="images/dark.jpg" alt="" uk-cover>
+            <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
+                <h3 class="uk-margin-remove">Bottom</h3>
+                <p class="uk-margin-remove">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </li>
+        <li>
+            <img src="images/light.jpg" alt="" uk-cover>
+            <div class="uk-overlay uk-overlay-primary uk-position-right uk-text-center uk-transition-slide-right uk-width-medium">
+                <h3 class="uk-margin-remove">Left</h3>
+                <p class="uk-margin-remove">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </li>
+    </ul>
+
+    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+
+</div>
+
+<!-- Migas -->
+<ul class="uk-breadcrumb">
+    <li><a href="#">Item</a></li>
+    <li><a href="#">Item</a></li>
+    <li class="uk-disabled"><a>Disabled</a></li>
+    <li><span>Active</span></li>
+</ul>
+
+
+
+<div uk-slider="center: true">
+
+    <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+
+        <ul class="uk-slider-items uk-child-width-1-2@s uk-grid">
+            <li>
+                <div class="uk-card uk-card-default">
+                    <div class="uk-card-media-top">
+                        <img src="images/sofa.jpg" alt="">
+                    </div>
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">Headline</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="uk-card uk-card-default">
+                    <div class="uk-card-media-top">
+                        <img src="images/sofa.jpg" alt="">
+                    </div>
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">Headline</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="uk-card uk-card-default">
+                    <div class="uk-card-media-top">
+                        <img src="images/sofa.jpg" alt="">
+                    </div>
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">Headline</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+
+    </div>
+
+    <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+
+</div>
+
+
+<!-- contenido class="uk-section uk-section-primary"-->
+<div class="uk-container">
+
+    <div class="uk-child-width-1-2@s" uk-grid>
+        <div>
+            <div class="uk-light uk-background-secondary uk-padding">
+                <h3>Light</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <button class="uk-button uk-button-default">Button</button>
+            </div>
+        </div>
+        <div>
+            <div class="uk-dark uk-background-muted uk-padding">
+                <h3>Dark</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <button class="uk-button uk-button-default">Button</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla -->
+    <div class="uk-overflow-auto">
+        <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
+            <thead>
+            <tr>
+                <th class="uk-table-shrink"></th>
+                <th class="uk-table-shrink">Preserve</th>
+                <th class="uk-table-expand">Expand + Link</th>
+                <th class="uk-width-small">Truncate</th>
+                <th class="uk-table-shrink uk-text-nowrap">Shrink + Nowrap</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><input class="uk-checkbox" type="checkbox"></td>
+                <td><img class="uk-preserve-width uk-border-circle" src="images/avatar.jpg" width="40" alt=""></td>
+                <td class="uk-table-link">
+                    <a class="uk-link-reset" href="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</a>
+                </td>
+                <td class="uk-text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</td>
+                <td class="uk-text-nowrap">Lorem ipsum dolor</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 class="uk-heading-line"><span>Formulario</span></h2>
+    <!-- Formulario -->
+    <form>
+        <fieldset class="uk-fieldset">
+
+            <legend class="uk-legend">Legend</legend>
+
+            <div class="uk-margin">
+                <input class="uk-input" type="text" placeholder="Input">
+            </div>
+
+            <div class="uk-margin">
+                <select class="uk-select">
+                    <option>Option 01</option>
+                    <option>Option 02</option>
+                </select>
+            </div>
+
+            <div class="uk-margin">
+                <textarea class="uk-textarea" rows="5" placeholder="Textarea"></textarea>
+            </div>
+
+            <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                <label><input class="uk-radio" type="radio" name="radio2" checked> A</label>
+                <label><input class="uk-radio" type="radio" name="radio2"> B</label>
+            </div>
+
+            <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                <label><input class="uk-checkbox" type="checkbox" checked> A</label>
+                <label><input class="uk-checkbox" type="checkbox"> B</label>
+            </div>
+
+            <div class="uk-margin">
+                <input class="uk-range" type="range" value="2" min="0" max="10" step="0.1">
+            </div>
+
+        </fieldset>
+    </form>
+
+
+</div>
+
+<a href="" uk-totop></a>
+
+<a href="" uk-slidenav-next></a>
+<a href="" uk-slidenav-previous></a>
+
+</body>
+</html>
