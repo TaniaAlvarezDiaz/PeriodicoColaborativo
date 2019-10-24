@@ -62,11 +62,6 @@ const iniciarServer = async () => {
             }
         });
 
-        var handlebars = require('handlebars');
-        handlebars.registerHelper("sumar", (a, b) => {
-            return a + b;
-        })
-
         await server.register(routes);
         await server.views({
             //Indicar los motores utilizados
@@ -79,7 +74,7 @@ const iniciarServer = async () => {
             layoutPath: './views/layout',
             //Context permite guardar info accesible desde cualquier plantilla
             context : {
-                sitioWeb: "wallapep"
+                sitioWeb: "periodico"
             }
         });
         await server.start();

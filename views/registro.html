@@ -1,12 +1,34 @@
 <section class="uk-section">
-    <div class="uk-card uk-card-default uk-card-body
-            uk-width-1-2@m uk-align-center">
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m uk-align-center">
         <form method="post" action="/registro" >
+
+            <div class="uk-margin">
+                <div class="uk-inline uk-width-1-1">
+                    <input class="uk-input" name="nombre"
+                           placeholder="Nombre" type="text" required>
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <div class="uk-inline uk-width-1-1">
+                    <input class="uk-input" name="apellidos"
+                           placeholder="Apellidos" type="text" required>
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <div class="uk-inline uk-width-1-1">
+                    <span class="uk-form-icon" uk-icon="icon: mail"></span>
+                    <input class="uk-input" name="email"
+                           placeholder="Email" type="email" required>
+                </div>
+            </div>
+
             <div class="uk-margin">
                 <div class="uk-inline uk-width-1-1">
                     <span class="uk-form-icon" uk-icon="icon: user"></span>
                     <input class="uk-input" name="usuario"
-                           placeholder="E-mail..." type="text">
+                           placeholder="Username" type="text" required>
                 </div>
             </div>
 
@@ -14,7 +36,7 @@
                 <div class="uk-inline uk-width-1-1">
                     <span class="uk-form-icon" uk-icon="icon: lock"></span>
                     <input class="uk-input" type="password" name="password"
-                           placeholder="Password...">
+                           placeholder="Password" required>
                 </div>
             </div>
 

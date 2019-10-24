@@ -30,7 +30,7 @@ module.exports = {
                             console.log("Eliminado")
                         })
 
-                    return h.redirect('/misanuncios?mensaje="Anuncio Eliminado"')
+                    return h.redirect('/misnoticias?mensaje="Anuncio Eliminado"')
                 }
             },
             {
@@ -66,9 +66,9 @@ module.exports = {
                         .then((id) => {
                             respuesta = "";
                             if (id == null) {
-                                respuesta =  h.redirect('/misanuncios?mensaje="Error al modificar"')
+                                respuesta =  h.redirect('/misnoticias?mensaje="Error al modificar"')
                             } else {
-                                respuesta = h.redirect('/misanuncios?mensaje="Anuncio modificado"')
+                                respuesta = h.redirect('/misnoticias?mensaje="Anuncio modificado"')
                             }
                         })
 
@@ -138,9 +138,9 @@ module.exports = {
                         .then((id) => {
                             respuesta = "";
                             if (id == null) {
-                                respuesta =  h.redirect('/misanuncios?mensaje="Error al insertar"')
+                                respuesta =  h.redirect('/misnoticias?mensaje="Error al insertar"')
                             } else {
-                                respuesta = h.redirect('/misanuncios?mensaje="Anuncio Insertado"')
+                                respuesta = h.redirect('/misnoticias?mensaje="Anuncio Insertado"')
                                 idAnuncio = id;
                             }
                         })
@@ -210,7 +210,7 @@ module.exports = {
 
                     usuarioBuscar = {
                         usuario: req.payload.usuario,
-                        password: password,
+                        password: password
                     }
 
                     // await no continuar hasta acabar esto
@@ -226,7 +226,7 @@ module.exports = {
                                     usuario: usuarios[0].usuario,
                                     secreto : "secreto"
                                 });
-                                respuesta = h.redirect('/misanuncios')
+                                respuesta = h.redirect('/misnoticias')
 
                             }
                         })
@@ -241,30 +241,48 @@ module.exports = {
                         .update(req.payload.password).digest('hex');
 
                     usuario = {
+                        nombre: req.payload.nombre,
+                        apellidos: req.payload.apellidos,
+                        email: req.payload.email,
                         usuario: req.payload.usuario,
-                        password: password,
+                        password: password
                     }
 
-                    // await no continuar hasta acabar esto
-                    // Da valor a respuesta
+                    criterio = {
+                        usuario: req.payload.usuario
+                    }
+
                     await repositorio.conexion()
-                        .then((db) => repositorio.insertarUsuario(db, usuario))
-                        .then((id) => {
-                            respuesta = "";
-                            if (id == null) {
-                                respuesta =  h.redirect('/registro?mensaje="Error al crear cuenta"')
+                        .then((db) => repositorio.obtenerUsuarios(db, criterio))
+                        .then((usuarios) => {
+                            //Si no hay usuarios con el mismo username, se permite insertar
+                            if (usuarios == null || usuarios.length == 0 ) {
+                                respuesta = "";
                             } else {
-                                respuesta = h.redirect('/login?mensaje="Usuario Creado"')
-                                idAnuncio = id;
+                                respuesta = h.redirect('/registro?mensaje="Error en el registro. El usuario ya existe en la base de datos."')
                             }
                         })
+
+                    if (respuesta == "") {
+                        await repositorio.conexion()
+                            .then((db) => repositorio.insertarUsuario(db, usuario))
+                            .then((id) => {
+                                respuesta = "";
+                                if (id == null) {
+                                    respuesta = h.redirect('/registro?mensaje="Error al crear cuenta"')
+                                } else {
+                                    respuesta = h.redirect('/login?mensaje="Usuario Creado"')
+                                    idAnuncio = id;
+                                }
+                            })
+                    }
 
                     return respuesta;
                 }
             },
             {
                 method: 'GET',
-                path: '/misanuncios',
+                path: '/misnoticias',
                 options: {
                     auth: 'auth-registrado'
                 },
@@ -314,7 +332,7 @@ module.exports = {
             },
             {
                 method: 'GET',
-                path: '/anuncios',
+                path: '/noticias',
                 handler: async (req, h) => {
 
 
