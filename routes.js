@@ -17,6 +17,115 @@ module.exports = {
 
         server.route([
             {
+                method: 'POST',
+                path: '/noticia/{id}/compartir',
+                options : {
+                    auth: 'auth-registrado',
+                    payload: {
+                        output: 'stream'
+                    }
+                },
+                handler: async (req, h) => {
+
+                    var criterio = {
+                        "_id" : require("mongodb").ObjectID(req.params.id),
+                        "usuario": req.state["session-id"].usuario
+                    }
+
+                    noticiaCompartida = {
+                        usuario: req.state["session-id"].usuario ,
+                        usuarioDestino: req.params.usuario,
+                        idNoticia: require("mongodb").ObjectID(req.params.id),
+                    }
+
+                    await repositorio.conexion()
+                        .then((db) => repositorio.insertarNoticiaCompartida(db, noticiaCompartida))
+                        .then((id) => {
+                            respuesta = "";
+                            if (id == null) {
+                                respuesta =  h.redirect('/misnoticias?mensaje=Error al compartir.&tipoMensaje=danger')
+                            } else {
+                                respuesta = h.redirect('/misnoticias?mensaje=Noticia compartida.&tipoMensaje=success')
+                                idAnuncio = id;
+                            }
+                        })
+
+                    return respuesta;
+                }
+            },
+            {
+                method: 'GET',
+                path: '/noticia/{id}/compartir',
+                options: {
+                    auth: 'auth-registrado'
+                },
+                handler: async (req, h) => {
+
+                    //Buscar todos los usuarios menos el actual, no se la puede compartir con él mismo
+                    var criterio = {
+                        "usuario": { $ne: req.state["session-id"].usuario }
+                    }
+                    await repositorio.conexion()
+                        .then((db) => repositorio.obtenerUsuarios(db, criterio))
+                        .then((usuarios) => {
+                            lstUsuarios = usuarios;
+                        })
+
+                    criterio = {
+                        "_id" : require("mongodb").ObjectID(req.params.id),
+                        "usuario": req.state["session-id"].usuario
+                    }
+                    await repositorio.conexion()
+                        .then((db) => repositorio.obtenerNoticias(db, criterio))
+                        .then((noticias) => {
+
+                            noticia = noticias[0];
+                        })
+
+                    return h.view('compartirnoticia',
+                        {
+                            usuarios: lstUsuarios,
+                            noticia: noticia
+                        },
+                        { layout: 'base'} );
+                }
+            },
+            {
+                method: 'GET',
+                path: '/noticiasCompartidas',
+                options: {
+                    auth: 'auth-registrado'
+                },
+                handler: async (req, h) => {
+
+                    var criterio = { "usuario" : req.state["session-id"].usuario };
+
+                    await repositorio.conexion()
+                        .then((db) => repositorio.obtenerNoticias(db, criterio))
+                        .then((anuncios) => {
+                            anunciosEjemplo = anuncios;
+                        })
+
+                    // Recorte
+                    anunciosEjemplo.forEach( (e) => {
+                        if (e.titulo.length > 25){
+                            e.titulo =
+                                e.titulo.substring(0, 25) + "...";
+                        }
+                        if (e.descripcion.length > 80) {
+                            e.descripcion =
+                                e.descripcion.substring(0, 80) + "...";;
+                        }
+                    });
+
+                    return h.view('noticias',
+                        {
+                            usuario: 'jordán',
+                            anuncios: anunciosEjemplo
+                        }, { layout: 'base'} );
+                }
+            },
+            {
                 method: 'GET',
                 path: '/misdatos',
                 options: {
@@ -24,7 +133,7 @@ module.exports = {
                 },
                 handler: async (req, h) => {
 
-                    var criterio = { "usuario" : req.auth.credentials };
+                    var criterio = { "usuario" : req.state["session-id"].usuario };
 
                     await repositorio.conexion()
                         .then((db) => repositorio.obtenerUsuarios(db, criterio))
@@ -35,14 +144,14 @@ module.exports = {
                     return h.view('misdatos',
                         {
                             usuario: usuario,
-                            usuarioAutenticado: req.auth.credentials
+                            usuarioAutenticado: req.state["session-id"].usuario
                         },
                         { layout: 'base'} );
                 }
             },
             {
                 method: 'GET',
-                path: '/anuncio/{id}/eliminar',
+                path: '/noticia/{id}/eliminar',
                 handler: async (req, h) => {
 
                     var criterio = { "_id" :
@@ -59,7 +168,7 @@ module.exports = {
             },
             {
                 method: 'POST',
-                path: '/anuncio/{id}/modificar',
+                path: '/noticia/{id}/modificar',
                 options : {
                     auth: 'auth-registrado',
                     payload: {
@@ -71,12 +180,12 @@ module.exports = {
                     // criterio de anucio a modificar
                     var criterio = {
                         "_id" : require("mongodb").ObjectID(req.params.id),
-                        "usuario": req.auth.credentials
+                        "usuario": req.state["session-id"].usuario
                     }
 
                     // nuevos valores para los atributos
                     anuncio = {
-                        usuario: req.auth.credentials ,
+                        usuario: req.state["session-id"].usuario ,
                         titulo: req.payload.titulo,
                         descripcion: req.payload.descripcion,
                         categoria: req.payload.categoria,
@@ -110,7 +219,7 @@ module.exports = {
             },
             {
                 method: 'GET',
-                path: '/anuncio/{id}/modificar',
+                path: '/noticia/{id}/modificar',
                 options: {
                     auth: 'auth-registrado'
                 },
@@ -120,10 +229,10 @@ module.exports = {
                         "_id" : require("mongodb").ObjectID(req.params.id),
                         //Para comprobar que el usuario que lo intenta modificar es el que esta en sesión
                         //Si no hacemos esto puede ser que alguien adivine la ID y lo intente modificar desde fuera
-                        "usuario": req.auth.credentials
+                        "usuario": req.state["session-id"].usuario
                     }
                     await repositorio.conexion()
-                        .then((db) => repositorio.obtenerAnuncios(db, criterio))
+                        .then((db) => repositorio.obtenerNoticias(db, criterio))
                         .then((anuncios) => {
                             // ¿Solo una coincidencia por _id?
                             anuncio = anuncios[0];
@@ -146,7 +255,7 @@ module.exports = {
                 handler: async (req, h) => {
 
                     anuncio = {
-                        usuario: req.auth.credentials ,
+                        usuario: req.state["session-id"].usuario ,
                         titulo: req.payload.titulo,
                         descripcion: req.payload.descripcion,
                         categoria: req.payload.categoria,
@@ -293,9 +402,9 @@ module.exports = {
                             .then((id) => {
                                 respuesta = "";
                                 if (id == null) {
-                                    respuesta = h.redirect('/registro?mensaje=Error al crear cuenta&tipoMensaje=danger')
+                                    respuesta = h.redirect('/registro?mensaje=Error al crear cuenta.&tipoMensaje=danger')
                                 } else {
-                                    respuesta = h.redirect('/login?mensaje=Usuario creado')
+                                    respuesta = h.redirect('/login?mensaje=Usuario creado.&tipoMensaje=success')
                                     idAnuncio = id;
                                 }
                             })
@@ -317,7 +426,7 @@ module.exports = {
                         pg = 1;
                     }
 
-                    var criterio = { "usuario" : req.auth.credentials };
+                    var criterio = { "usuario" : req.state["session-id"].usuario };
                     // cookieAuth
 
                     await repositorio.conexion()
@@ -345,10 +454,10 @@ module.exports = {
                             paginas.push({valor: i});
                         }
                     }
-                    return h.view('misanuncios',
+                    return h.view('misnoticias',
                         {
                             anuncios: anunciosEjemplo,
-                            usuarioAutenticado: req.auth.credentials,
+                            usuarioAutenticado: req.state["session-id"].usuario,
                             paginas : paginas
                         },
                         { layout: 'base'} );
@@ -359,19 +468,12 @@ module.exports = {
                 path: '/noticias',
                 handler: async (req, h) => {
 
-
-                    anunciosEjemplo = [
-                        {titulo: "iphone", precio: 400},
-                        {titulo: "xBox", precio: 300},
-                        {titulo: "teclado", precio: 30},
-                    ]
-
                     var criterio = {};
                     if (req.query.criterio != null ){
                         criterio = { "titulo" : {$regex : ".*"+req.query.criterio+".*"}};
                     }
                     await repositorio.conexion()
-                        .then((db) => repositorio.obtenerAnuncios(db, criterio))
+                        .then((db) => repositorio.obtenerNoticias(db, criterio))
                         .then((anuncios) => {
                             anunciosEjemplo = anuncios;
                         })
@@ -388,7 +490,7 @@ module.exports = {
                         }
                     });
 
-                    return h.view('anuncios',
+                    return h.view('noticias',
                         {
                             usuario: 'jordán',
                             anuncios: anunciosEjemplo
@@ -406,7 +508,7 @@ module.exports = {
             },
             {
                 method: 'GET',
-                path: '/anuncio/{id}',
+                path: '/noticia/{id}',
                 handler: async  (req, h) => {
                     return 'Anuncio id: ' + req.params.id;
                 }

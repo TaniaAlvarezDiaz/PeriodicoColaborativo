@@ -15,11 +15,15 @@
                     <td >{{ titulo }}</td>
                     <td >{{ precio }}</td>
                     <td>
-                        <a class="uk-link" href="/anuncio/{{_id}}/modificar">
+                        <a class="uk-link" href="/noticia/{{_id}}/compartir">
+                            <span  uk-icon="social"></span>
+                            Compartir
+                        </a> <br>
+                        <a class="uk-link" href="/noticia/{{_id}}/modificar">
                             <span  uk-icon="pencil"></span>
                             Modificar
                         </a> <br>
-                        <a class="uk-link" href="/anuncio/{{_id}}/eliminar">
+                        <a class="uk-link" href="/noticia/{{_id}}/eliminar">
                             <span  uk-icon="trash"></span>
                             Eliminar
                         </a>
