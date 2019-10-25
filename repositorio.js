@@ -42,6 +42,7 @@ module.exports = {
                 }
                 db.close();
             });
+            db.close();
         });
 
         return promise;

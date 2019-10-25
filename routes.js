@@ -27,14 +27,10 @@ module.exports = {
                 },
                 handler: async (req, h) => {
 
-                    var criterio = {
-                        "_id" : require("mongodb").ObjectID(req.params.id),
-                        "usuario": req.state["session-id"].usuario
-                    }
-
                     noticiaCompartida = {
                         usuario: req.state["session-id"].usuario ,
-                        usuarioDestino: req.params.usuario,
+                        //***OJO: no esta funcionando, no veo el fallo
+                        usuarioDestino: req.payload.usuario,
                         idNoticia: require("mongodb").ObjectID(req.params.id),
                     }
 
@@ -46,7 +42,6 @@ module.exports = {
                                 respuesta =  h.redirect('/misnoticias?mensaje=Error al compartir.&tipoMensaje=danger')
                             } else {
                                 respuesta = h.redirect('/misnoticias?mensaje=Noticia compartida.&tipoMensaje=success')
-                                idAnuncio = id;
                             }
                         })
 
@@ -84,6 +79,7 @@ module.exports = {
 
                     return h.view('compartirnoticia',
                         {
+                            usuarioAutenticado: req.state["session-id"].usuario,
                             usuarios: lstUsuarios,
                             noticia: noticia
                         },
@@ -101,13 +97,28 @@ module.exports = {
                     var criterio = { "usuario" : req.state["session-id"].usuario };
 
                     await repositorio.conexion()
+                        .then((db) => repositorio.obtenerNoticiasCompartidas(db, criterio))
+                        .then((noticias) => {
+                            //Cada objeto tiene el id de la noticia compartida
+                            lstNoticias = noticias;
+                        })
+
+                    //Obtener los ids de las noticias
+                    lstIdsNoticias = []
+                    for ( i=0; i<lstNoticias.length; i++)
+                        lstIdsNoticias[i] = lstNoticias[i].idNoticia;
+
+                    //Buscar los ids de las noticias compartidas en la colección noticias para obtener el resto de valores de la noticia
+                    criterio = { "_id" : {$in: lstIdsNoticias}};
+                    await repositorio.conexion()
                         .then((db) => repositorio.obtenerNoticias(db, criterio))
-                        .then((anuncios) => {
-                            anunciosEjemplo = anuncios;
+                        .then((noticiasCompartidas) => {
+                            lstNoticias = noticiasCompartidas;
                         })
 
                     // Recorte
-                    anunciosEjemplo.forEach( (e) => {
+                    //**OJO modificar en funcion de los parametros de Pelayo
+                    lstNoticias.forEach( (e) => {
                         if (e.titulo.length > 25){
                             e.titulo =
                                 e.titulo.substring(0, 25) + "...";
@@ -118,10 +129,10 @@ module.exports = {
                         }
                     });
 
-                    return h.view('noticias',
+                    return h.view('noticiascompartidas',
                         {
-                            usuario: 'jordán',
-                            anuncios: anunciosEjemplo
+                            usuarioAutenticado: req.state["session-id"].usuario,
+                            noticias: lstNoticias
                         }, { layout: 'base'} );
                 }
             },
