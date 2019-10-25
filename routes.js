@@ -18,6 +18,30 @@ module.exports = {
         server.route([
             {
                 method: 'GET',
+                path: '/misdatos',
+                options: {
+                    auth: 'auth-registrado'
+                },
+                handler: async (req, h) => {
+
+                    var criterio = { "usuario" : req.auth.credentials };
+
+                    await repositorio.conexion()
+                        .then((db) => repositorio.obtenerUsuarios(db, criterio))
+                        .then((usuarios) => {
+                           usuario = usuarios[0]; //Devuelve el usuario en sesión
+                        })
+
+                    return h.view('misdatos',
+                        {
+                            usuario: usuario,
+                            usuarioAutenticado: req.auth.credentials
+                        },
+                        { layout: 'base'} );
+                }
+            },
+            {
+                method: 'GET',
                 path: '/anuncio/{id}/eliminar',
                 handler: async (req, h) => {
 
@@ -30,7 +54,7 @@ module.exports = {
                             console.log("Eliminado")
                         })
 
-                    return h.redirect('/misnoticias?mensaje="Anuncio Eliminado"')
+                    return h.redirect('/misnoticias?mensaje=Anuncio eliminado')
                 }
             },
             {
@@ -66,9 +90,9 @@ module.exports = {
                         .then((id) => {
                             respuesta = "";
                             if (id == null) {
-                                respuesta =  h.redirect('/misnoticias?mensaje="Error al modificar"')
+                                respuesta =  h.redirect('/misnoticias?mensaje=Error al modificar')
                             } else {
-                                respuesta = h.redirect('/misnoticias?mensaje="Anuncio modificado"')
+                                respuesta = h.redirect('/misnoticias?mensaje=Anuncio modificado')
                             }
                         })
 
@@ -138,9 +162,9 @@ module.exports = {
                         .then((id) => {
                             respuesta = "";
                             if (id == null) {
-                                respuesta =  h.redirect('/misnoticias?mensaje="Error al insertar"')
+                                respuesta =  h.redirect('/misnoticias?mensaje=Error al insertar')
                             } else {
-                                respuesta = h.redirect('/misnoticias?mensaje="Anuncio Insertado"')
+                                respuesta = h.redirect('/misnoticias?mensaje=Anuncio insertado')
                                 idAnuncio = id;
                             }
                         })
@@ -220,7 +244,7 @@ module.exports = {
                         .then((usuarios) => {
                             respuesta = "";
                             if (usuarios == null || usuarios.length == 0 ) {
-                                respuesta =  h.redirect('/login?mensaje="Usuario o password incorrecto"')
+                                respuesta =  h.redirect('/login?mensaje=Usuario o password incorrecto.&tipoMensaje=danger')
                             } else {
                                 req.cookieAuth.set({
                                     usuario: usuarios[0].usuario,
@@ -259,7 +283,7 @@ module.exports = {
                             if (usuarios == null || usuarios.length == 0 ) {
                                 respuesta = "";
                             } else {
-                                respuesta = h.redirect('/registro?mensaje="Error en el registro. El usuario ya existe en la base de datos."')
+                                respuesta = h.redirect('/registro?mensaje=Error en el registro. El usuario ya existe en la base de datos.&tipoMensaje=danger')
                             }
                         })
 
@@ -269,9 +293,9 @@ module.exports = {
                             .then((id) => {
                                 respuesta = "";
                                 if (id == null) {
-                                    respuesta = h.redirect('/registro?mensaje="Error al crear cuenta"')
+                                    respuesta = h.redirect('/registro?mensaje=Error al crear cuenta&tipoMensaje=danger')
                                 } else {
-                                    respuesta = h.redirect('/login?mensaje="Usuario Creado"')
+                                    respuesta = h.redirect('/login?mensaje=Usuario creado')
                                     idAnuncio = id;
                                 }
                             })

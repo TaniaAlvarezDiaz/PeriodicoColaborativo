@@ -53,20 +53,22 @@
             <div class="uk-navbar-right">
                 <!-- uk-visible@m Lo visualiza en pantallas más pequeñas de m-->
                 <ul class="uk-navbar-nav uk-visible@m">
+                    {{#if usuarioAutenticado}}
                     <li>
-                        <a href="/seguidos">
+                        <a href="/">
                             <span data-uk-icon="heart"
                                   class="uk-margin-small-right">
-                            </span> Seguidos
+                            </span> Noticias compartidas
                         </a>
                     </li>
                     <li>
                         <a href="/misnoticias">
                             <span data-uk-icon="list"
                                   class="uk-margin-small-right">
-                            </span> Mis anuncios
+                            </span> Mis noticias
                         </a>
                     </li>
+                    {{/if}}
                 </ul>
                 <div class="uk-navbar-item">
                     <a href="/publicar"
@@ -79,9 +81,32 @@
 
                 <!-- Si llega la variable usuarioAutenticado muestra un cuadro con su nombre, sino muestra el boton de login-->
                 {{#if usuarioAutenticado}}
-                <div class="uk-navbar-item">
+               <!-- <div class="uk-navbar-item">
                     <div class="uk-button uk-button-default uk-visible@m">
                          {{usuarioAutenticado}}
+                    </div>
+                </div>-->
+                <div class="uk-inline">
+                    <button class="uk-button uk-button-default" type="button">{{usuarioAutenticado}}</button>
+                    <div uk-dropdown>
+                        <ul class="uk-nav uk-dropdown-nav">
+                            <li>
+                                <a href="/misdatos">
+                                     <span data-uk-icon="user"
+                                           class="uk-margin-small-right">
+                                    </span>
+                                    Mi perfil
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/desconectarse">
+                                    <span data-uk-icon="sign-out"
+                                          class="uk-margin-small-right">
+                                    </span>
+                                    Desconectarse
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 {{/if}}
@@ -153,7 +178,7 @@
             <li><a href="/noticias">Internacional</a></li>
             <li><a href="/noticias">Política</a></li>
             <li><a href="/noticias">Economía</a></li>
-            <li><a href="/noticias">Socieda</a></li>
+            <li><a href="/noticias">Sociedad</a></li>
             <li><a href="/noticias">Cultura</a></li>
             <li><a href="/noticias">Ciencia</a></li>
             <li><a href="/noticias">Deportes</a></li>
