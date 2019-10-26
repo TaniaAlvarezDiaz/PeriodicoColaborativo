@@ -20,10 +20,7 @@ module.exports = {
                 method: 'POST',
                 path: '/noticia/{id}/compartir',
                 options : {
-                    auth: 'auth-registrado',
-                    payload: {
-                        output: 'stream'
-                    }
+                    auth: 'auth-registrado'
                 },
                 handler: async (req, h) => {
 
