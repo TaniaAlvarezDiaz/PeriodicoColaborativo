@@ -1,0 +1,66 @@
+<section class="uk-section uk-margin-xlarge-left uk-margin-small-top uk-margin-xlarge-right">
+    <div class="uk-margin-medium-bottom">
+        <article class="uk-article">
+            <h1 class="uk-article-title"><a class="uk-link-reset" href="">{{ noticia.titulo }}</a></h1>
+            <p class="uk-article-meta">Escrito por <strong>{{ noticia.usuario }}</strong> en fecha <strong>{{ noticia.fecha }}</strong></p>
+            <p class="uk-text-lead">{{ noticia.subtitulo }}</p>
+            <p>{{ noticia.cuerpo }}</p>
+            <div class="uk-grid-small uk-child-width-auto" uk-grid>
+                <div>
+                    <a class="uk-button uk-button-text" href="#">{{ noticia.categoria }}</a>
+                </div>
+                <div>
+                    <a class="uk-button uk-button-text" href="#">{{numeroComentarios}} Comentarios.</a>
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <div class="uk-card uk-card-default uk-card-body
+        uk-width-1-1@m uk-align-left">
+        <form method="post" action="/publicarComentario">
+            <fieldset class="uk-fieldset">
+                <div class="uk-grid uk-margin">
+                    <div class="uk-width-1-5">
+                        <label class="uk-form-label">
+                            Valoración
+                        </label>
+                        <input class="uk-input" type="number"
+                               name="valoracion" required="true" max="10" min="0">
+                    </div>
+                    <div class="uk-width-4-5">
+                        <input class="uk-input" type="hidden"
+                               name="idNoticia" required="true" value={{noticia._id}}>
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <textarea class="uk-textarea" rows="5"
+                              name="comentario"
+                              placeholder="Comentario"
+                              required="true"></textarea>
+                </div>
+                <button class="uk-button uk-button-primary" type="submit">
+                    <span data-uk-icon="plus-circle" class="uk-margin-small-right"></span>Añadir Comentario</button>
+            </fieldset>
+        </form>
+    </div>
+
+    {{#each comentarios}}
+        <article class="uk-comment uk-comment-primary uk-margin-small-top">
+            <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
+                <div class="uk-width-expand">
+                    <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">{{usuario}}</a></h4>
+                    <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                        <li><a href="#">Valoracion: {{valoracion}}</a></li>
+                        {{#if borrar }}
+                            <li><a href="/eliminar/{{_id}}/comentario/{{noticia}}"><span class="uk-margin-small-right" uk-icon="trash"></span>Eliminar</a></li>
+                        {{/if}}
+                    </ul>
+                </div>
+            </header>
+            <div class="uk-comment-body">
+                <p>{{comentario}}</p>
+            </div>
+        </article>
+    {{/each}}
+</section>
