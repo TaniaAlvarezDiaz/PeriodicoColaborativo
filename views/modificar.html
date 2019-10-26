@@ -1,71 +1,67 @@
 <section class="uk-section">
     <div class="uk-card uk-card-default uk-card-body
         uk-width-1-2@m uk-align-center">
-        <form method="post" action="/noticia/{{ anuncio._id}}/modificar"
+        <form method="post" action="/noticia/{{ noticia._id}}/modificar"
               encType="multipart/form-data">
 
             <fieldset class="uk-fieldset">
 
-                <legend class="uk-legend">Modificar </legend>
+                <legend class="uk-legend">Modificar Noticia</legend>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label">
+                        Título
+                    </label>
+                    <input class="uk-input" type="text"
+                           name="titulo"
+                           placeholder="España asciende en el ranking..."
+                           required="true" value="{{noticia.titulo}}">
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label">
+                        Subtítulo
+                    </label>
+                    <input class="uk-input" type="text"
+                           name="subtitulo"
+                           placeholder="El ranking de países mostrado en el diario El Mundo..."
+                           required="true" value="{{noticia.subtitulo}}">
+                </div>
 
                 <div class="uk-grid uk-margin">
                     <div class="uk-width-2-3">
-                        <label class="uk-form-label">
-                            ¿Qué es?
-                        </label>
-                        <input class="uk-input" type="text"
-                               name="titulo"
-                               placeholder="Una lámpara antigua"
-                               value="{{ anuncio.titulo }}"
-                               required="true">
+                        <label class="uk-form-label">Categoría</label>
+                        <select class="uk-select" name="categoria"
+                                required="true">
+                            <option id="deportes" value="deportes">Deportes</option>
+                            <option id="economia" value="economia">Economía</option>
+                            <option id="opinion" value="opinion">Opinión</option>
+                            <option id="cultura" value="cultura">Cultura</option>
+                            <option id="ocio" value="ocio">Ocio</option>
+                            <option id="vidaE" value="vidaE">Vida y Estilo</option>
+                            <option id="otros" value="otros">Otros</option>
+                        </select>
                     </div>
+                    <script>
+                        $("#{{ noticia.categoria }}").attr("selected","selected");
+                    </script>
                     <div class="uk-width-1-3">
                         <label class="uk-form-label">
-                            Precio (€)
+                            Fecha
                         </label>
-                        <input class="uk-input" type="number"
-                               name="precio" placeholder="10"
-                               value="{{ anuncio.precio }}"
-                               required="true">
+                        <input class="uk-input" type="date"
+                               name="fecha" required="true" value="{{noticia.fecha}}">
                     </div>
                 </div>
-
                 <div class="uk-margin">
-                    <label class="uk-form-label">Categoría</label>
-                    <select class="uk-select" name="categoria"
-                            required="true">
-                        <option id="coches"
-                                value="coches">Coches</option>
-                        <option id="motos"
-                                value="motos">Motos</option>
-                        <option id="bicicletas"
-                                value="bicicletas">Bicicletas</option>
-                        <option id="informatica"
-                                value="informatica">Informática</option>
-                        <option id="telefonos"
-                                value="telefonos">Teléfonos</option>
-                        <option id="moda"
-                                value="moda">Moda</option>
-                        <option id="otros"
-                                value="otros">Otros</option>
-                    </select>
-                </div>
-
-                <script>
-                    $("#{{ anuncio.categoria }}").attr("selected","selected");
-                </script>
-
-                <div class="uk-margin">
-                    <label class="uk-form-label">Descripción</label>
+                    <label class="uk-form-label">Cuerpo</label>
                     <textarea class="uk-textarea" rows="5"
-                              name="descripcion"
-                              placeholder="perfecto estado, mide 180 de alto..."
-                              required="true">{{ anuncio.descripcion }}
-                    </textarea>
+                              name="cuerpo"
+                              placeholder="El 28 de abril de 1998..."
+                              required="true">{{noticia.cuerpo}}</textarea>
                 </div>
 
                 <div class="uk-margin">
-                    <img width="400" src="/subidas/{{ anuncio._id}}.png">
+                    <img width="400" src="/subidas/{{ noticia._id}}.png">
                 </div>
 
                 <div class="uk-margin">

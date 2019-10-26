@@ -2,18 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f292b6c3-8394-4381-b46a-cdb750a0aba9" name="Default" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/compartirnoticia.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/compartirnoticia.html" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes.js" afterDir="false" />
+>>>>>>> master
     </list>
-    <ignored path="$PROJECT_DIR$/.tmp/" />
-    <ignored path="$PROJECT_DIR$/temp/" />
-    <ignored path="$PROJECT_DIR$/tmp/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="FUSProjectUsageTrigger">
     <session id="-1038897231">
       <usages-collector id="statistics.lifecycle.project">
@@ -196,6 +199,8 @@
       </file>
     </leaf>
   </component>
+=======
+>>>>>>> master
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -252,6 +257,7 @@
     </replaceStrings>
   </component>
   <component name="Git.Settings">
+<<<<<<< HEAD
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -274,16 +280,22 @@
         <option value="$PROJECT_DIR$/routes.js" />
         <option value="$PROJECT_DIR$/views/compartirnoticia.html" />
       </list>
+=======
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="ramaPelayo" />
+      </map>
+>>>>>>> master
     </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
     <exe-path />
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
+<<<<<<< HEAD
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
@@ -328,6 +340,12 @@
       </pane>
     </panes>
   </component>
+=======
+  <component name="ProjectId" id="1Sf2FW9eXWjgLxn13rSjZMkYpkG" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+>>>>>>> master
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
@@ -357,13 +375,13 @@
     </option>
   </component>
   <component name="RunManager" selected="Node.js.main.js">
-    <configuration name="main.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-js-file="main.js" working-dir="$PROJECT_DIR$">
+    <configuration name="main.js" type="NodeJSConfigurationType" temporary="true" path-to-js-file="main.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
-    <configuration name="repositorio.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-js-file="repositorio.js" working-dir="$PROJECT_DIR$">
+    <configuration name="repositorio.js" type="NodeJSConfigurationType" temporary="true" path-to-js-file="repositorio.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
-    <configuration name="routes.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-js-file="routes.js" working-dir="$PROJECT_DIR$">
+    <configuration name="routes.js" type="NodeJSConfigurationType" temporary="true" path-to-js-file="routes.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
     <list>
@@ -373,6 +391,8 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.repositorio.js" />
+        <item itemvalue="Node.js.routes.js" />
         <item itemvalue="Node.js.main.js" />
         <item itemvalue="Node.js.repositorio.js" />
         <item itemvalue="Node.js.routes.js" />
@@ -402,6 +422,7 @@
       <workItem from="1571855648970" duration="132000" />
       <workItem from="1571863069856" duration="300000" />
       <workItem from="1571924976127" duration="4010000" />
+<<<<<<< HEAD
       <workItem from="1571929927540" duration="6694000" />
       <workItem from="1571952063802" duration="3577000" />
       <workItem from="1572000498552" duration="21917000" />
@@ -712,5 +733,24 @@
         </state>
       </provider>
     </entry>
+=======
+      <workItem from="1571940244905" duration="910000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+>>>>>>> master
   </component>
 </project>

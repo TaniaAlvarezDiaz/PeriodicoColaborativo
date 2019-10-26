@@ -63,9 +63,9 @@ module.exports = {
 
         return promise;
     },
-    eliminarAnuncios : async (db, criterio) => {
+    eliminarComentario : async (db, criterio) => {
         promise = new Promise((resolve, reject) => {
-            var collection = db.collection('noticias');
+            var collection = db.collection('comentarios');
             collection.remove(criterio, (err, result) => {
                 if (err) {
                     resolve(null);
@@ -79,7 +79,7 @@ module.exports = {
         return promise;
     },
     //"pg" es el indice de la pagina que quieres consultar
-    obtenerAnunciosPg : async (db, pg, criterio) => {
+    obtenerNoticiasPg : async (db, pg, criterio) => {
         promise = new Promise((resolve, reject) => {
             var collection = db.collection('noticias');
             //Contar el numero de elementos para saber cuantas páginas poner
@@ -109,7 +109,7 @@ module.exports = {
                 if (err) {
                     resolve(null);
                 } else {
-                    // lista de anuncios
+                    // lista de noticias
                     resolve(result);
                 }
                 db.close();
@@ -135,11 +135,11 @@ module.exports = {
 
         return promise;
     },
-    insertarAnuncio : async (db, anuncio) => {
+    insertarNoticia : async (db, noticia) => {
 
         promise = new Promise((resolve, reject) => {
             var collection = db.collection('noticias');
-            collection.insert(anuncio, (err, result) => {
+            collection.insert(noticia, (err, result) => {
                 if (err) {
                     resolve(null);
                 } else {
@@ -152,11 +152,43 @@ module.exports = {
 
         return promise;
     },
-    modificarAnuncio : async (db, criterio, anuncio) => {
+    insertarComentario : async (db, comentario) => {
+
+        promise = new Promise((resolve, reject) => {
+            var collection = db.collection('comentarios');
+            collection.insert(comentario, (err, result) => {
+                if (err) {
+                    resolve(null);
+                } else {
+                    // _id no es un string es un ObjectID
+                    resolve(result.ops[0]._id.toString());
+                }
+                db.close();
+            });
+        });
+
+        return promise;
+    },
+    obtenerComentarios : async (db, criterio) => {
+        promise = new Promise((resolve, reject) => {
+            var collection = db.collection('comentarios');
+            collection.find(criterio).toArray( (err, result) => {
+                if (err) {
+                    resolve(null);
+                } else {
+                    // lista de comemtarios
+                    resolve(result);
+                }
+                db.close();
+            });
+        });
+        return promise;
+    },
+    modificarNoticia : async (db, criterio, noticia) => {
 
         promise = new Promise((resolve, reject) => {
             var collection = db.collection('noticias');
-            collection.update(criterio, {$set: anuncio}, (err, result) => {
+            collection.update(criterio, {$set: noticia}, (err, result) => {
                 if (err) {
                     resolve(null);
                 } else {
