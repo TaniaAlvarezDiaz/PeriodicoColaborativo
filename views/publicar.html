@@ -5,50 +5,55 @@
         <form method="post" action="/publicar" encType="multipart/form-data">
             <fieldset class="uk-fieldset">
 
-                <legend class="uk-legend">Información </legend>
+                <legend class="uk-legend">Nueva Noticia </legend>
 
+                <div class="uk-margin">
+                    <label class="uk-form-label">
+                        Título
+                    </label>
+                    <input class="uk-input" type="text"
+                           name="titulo"
+                           placeholder="España asciende en el ranking..."
+                           required="true">
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label">
+                        Subtítulo
+                    </label>
+                    <input class="uk-input" type="text"
+                           name="subtitulo"
+                           placeholder="El ranking de países mostrado en el diario El Mundo..."
+                           required="true">
+                </div>
                 <div class="uk-grid uk-margin">
                     <div class="uk-width-2-3">
-                        <label class="uk-form-label">
-                            ¿Qué es?
-                        </label>
-                        <input class="uk-input" type="text"
-                               name="titulo"
-                               placeholder="Una lámpara antigua"
-                               required="true">
+                        <label class="uk-form-label">Categoría</label>
+                        <select class="uk-select" name="categoria"
+                                required="true">
+                            <option value="deportes">Deportes</option>
+                            <option value="economia">Economía</option>
+                            <option value="opinion">Opinión</option>
+                            <option value="cultura">Cultura</option>
+                            <option value="ocio">Ocio</option>
+                            <option value="vidaE">Vida y Estilo</option>
+                            <option value="otros">Otros</option>
+                        </select>
                     </div>
                     <div class="uk-width-1-3">
                         <label class="uk-form-label">
-                            Precio (€)
+                            Fecha
                         </label>
-                        <input class="uk-input" type="number"
-                               name="precio" placeholder="10"
-                               required="true">
+                        <input class="uk-input" type="date"
+                               name="fecha" required="true">
                     </div>
                 </div>
-
                 <div class="uk-margin">
-                    <label class="uk-form-label">Categoría</label>
-                    <select class="uk-select" name="categoria"
-                            required="true">
-                        <option value="coches">Coches</option>
-                        <option value="motos">Motos</option>
-                        <option value="bicicletas">Bicicletas</option>
-                        <option value="informatica">Informática</option>
-                        <option value="telefonos">Teléfonos</option>
-                        <option value="moda">Moda</option>
-                        <option value="otros">Otros</option>
-                    </select>
-                </div>
-
-                <div class="uk-margin">
-                    <label class="uk-form-label">Descripción</label>
+                    <label class="uk-form-label">Cuerpo</label>
                     <textarea class="uk-textarea" rows="5"
-                              name="descripcion"
-                              placeholder="perfecto estado, mide 180 de alto..."
+                              name="cuerpo"
+                              placeholder="El 28 de abril de 1998..."
                               required="true"></textarea>
                 </div>
-
                 <div class="uk-margin">
                     <label class="uk-form-label">Foto</label>
                     <div uk-form-custom="target: true">

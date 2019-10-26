@@ -18,24 +18,25 @@ module.exports = {
         server.route([
             {
                 method: 'GET',
-                path: '/anuncio/{id}/eliminar',
+                path: '/eliminar/{id}/comentario/{noticia}',
                 handler: async (req, h) => {
 
                     var criterio = { "_id" :
                             require("mongodb").ObjectID(req.params.id) };
 
                     await repositorio.conexion()
-                        .then((db) => repositorio.eliminarAnuncios(db, criterio))
+                        .then((db) => repositorio.eliminarComentario(db, criterio))
                         .then((resultado) => {
-                            console.log("Eliminado")
+                            console.log("Comentario eliminado")
                         })
-
-                    return h.redirect('/misnoticias?mensaje="Anuncio Eliminado"')
+                    console.log(req.params.id)
+                    console.log(req.params.noticia)
+                    return h.redirect('/detalle/'+ req.params.noticia + '?mensaje="Comentario Eliminado Correctamente"')
                 }
             },
             {
                 method: 'POST',
-                path: '/anuncio/{id}/modificar',
+                path: '/noticia/{id}/modificar',
                 options : {
                     auth: 'auth-registrado',
                     payload: {
@@ -47,28 +48,29 @@ module.exports = {
                     // criterio de anucio a modificar
                     var criterio = {
                         "_id" : require("mongodb").ObjectID(req.params.id),
-                        "usuario": req.auth.credentials
+                        "usuario": req.state["session-id"].usuario
                     }
 
                     // nuevos valores para los atributos
-                    anuncio = {
+                    noticia = {
                         usuario: req.auth.credentials ,
                         titulo: req.payload.titulo,
-                        descripcion: req.payload.descripcion,
+                        subtitulo: req.payload.subtitulo,
                         categoria: req.payload.categoria,
-                        precio: Number.parseFloat(req.payload.precio),
+                        fecha: req.payload.fecha,
+                        cuerpo: req.payload.cuerpo
                     }
 
                     // await no continuar hasta acabar esto
                     // Da valor a respuesta
                     await repositorio.conexion()
-                        .then((db) => repositorio.modificarAnuncio(db,criterio,anuncio))
+                        .then((db) => repositorio.modificarNoticia(db,criterio,noticia))
                         .then((id) => {
                             respuesta = "";
                             if (id == null) {
-                                respuesta =  h.redirect('/misnoticias?mensaje="Error al modificar"')
+                                respuesta =  h.redirect('/noticias?mensaje="Error al modificar la noticia"')
                             } else {
-                                respuesta = h.redirect('/misnoticias?mensaje="Anuncio modificado"')
+                                respuesta = h.redirect('/noticias?mensaje="Noticia modificada correctamente"')
                             }
                         })
 
@@ -86,7 +88,7 @@ module.exports = {
             },
             {
                 method: 'GET',
-                path: '/anuncio/{id}/modificar',
+                path: '/noticia/{id}/modificar',
                 options: {
                     auth: 'auth-registrado'
                 },
@@ -96,17 +98,17 @@ module.exports = {
                         "_id" : require("mongodb").ObjectID(req.params.id),
                         //Para comprobar que el usuario que lo intenta modificar es el que esta en sesión
                         //Si no hacemos esto puede ser que alguien adivine la ID y lo intente modificar desde fuera
-                        "usuario": req.auth.credentials
+                        "usuario": req.state["session-id"].usuario
                     }
                     await repositorio.conexion()
-                        .then((db) => repositorio.obtenerAnuncios(db, criterio))
-                        .then((anuncios) => {
+                        .then((db) => repositorio.obtenerNoticias(db, criterio))
+                        .then((noticias) => {
                             // ¿Solo una coincidencia por _id?
-                            anuncio = anuncios[0];
+                            noticia = noticias[0];
                         })
 
                     return h.view('modificar',
-                        { anuncio: anuncio},
+                        { noticia: noticia},
                         { layout: 'base'} );
                 }
             },
@@ -121,27 +123,27 @@ module.exports = {
                 },
                 handler: async (req, h) => {
 
-                    anuncio = {
+                    noticia = {
                         usuario: req.auth.credentials ,
                         titulo: req.payload.titulo,
-                        descripcion: req.payload.descripcion,
+                        subtitulo: req.payload.subtitulo,
                         categoria: req.payload.categoria,
-                        precio: Number.parseFloat(req.payload.precio),
-
+                        fecha: req.payload.fecha,
+                        cuerpo: req.payload.cuerpo
                     }
 
                     // await no continuar hasta acabar esto
                     // Da valor a respuesta
 
                     await repositorio.conexion()
-                        .then((db) => repositorio.insertarAnuncio(db, anuncio))
+                        .then((db) => repositorio.insertarNoticia(db, noticia))
                         .then((id) => {
                             respuesta = "";
                             if (id == null) {
                                 respuesta =  h.redirect('/misnoticias?mensaje="Error al insertar"')
                             } else {
-                                respuesta = h.redirect('/misnoticias?mensaje="Anuncio Insertado"')
-                                idAnuncio = id;
+                                respuesta = h.redirect('/misnoticias?mensaje="Noticia Insertada"')
+                                idNoticia = id;
                             }
                         })
 
@@ -149,7 +151,7 @@ module.exports = {
                     extension = req.payload.foto.hapi.filename.split('.')[1];
 
                     await module.exports.utilSubirFichero(
-                        binario, idAnuncio, extension);
+                        binario, idNoticia, extension);
 
                     return respuesta;
                 }
@@ -297,11 +299,11 @@ module.exports = {
                     // cookieAuth
 
                     await repositorio.conexion()
-                        .then((db) => repositorio.obtenerAnunciosPg(db, pg, criterio))
-                        .then((anuncios, total) => {
-                            anunciosEjemplo = anuncios;
+                        .then((db) => repositorio.obtenerNoticiasPg(db, pg, criterio))
+                        .then((noticias, total) => {
+                            noticiasEjemplo = noticias;
 
-                            pgUltima = anunciosEjemplo.total/2;
+                            pgUltima = noticiasEjemplo.total/2;
                             // La página 2.5 no existe
                             // Si excede sumar 1 y quitar los decimales
                             if (pgUltima % 2 > 0 ){
@@ -321,9 +323,9 @@ module.exports = {
                             paginas.push({valor: i});
                         }
                     }
-                    return h.view('misanuncios',
+                    return h.view('misnoticias',
                         {
-                            anuncios: anunciosEjemplo,
+                            noticias: noticiasEjemplo,
                             usuarioAutenticado: req.auth.credentials,
                             paginas : paginas
                         },
@@ -336,7 +338,7 @@ module.exports = {
                 handler: async (req, h) => {
 
 
-                    anunciosEjemplo = [
+                    noticiasEjemplo = [
                         {titulo: "iphone", precio: 400},
                         {titulo: "xBox", precio: 300},
                         {titulo: "teclado", precio: 30},
@@ -347,27 +349,31 @@ module.exports = {
                         criterio = { "titulo" : {$regex : ".*"+req.query.criterio+".*"}};
                     }
                     await repositorio.conexion()
-                        .then((db) => repositorio.obtenerAnuncios(db, criterio))
-                        .then((anuncios) => {
-                            anunciosEjemplo = anuncios;
+                        .then((db) => repositorio.obtenerNoticias(db, criterio))
+                        .then((noticias) => {
+                            noticiasEjemplo = noticias;
                         })
 
+
                     // Recorte
-                    anunciosEjemplo.forEach( (e) => {
+                    noticiasEjemplo.forEach( (e) => {
+                        if (e.usuario == req.state["session-id"].usuario) {
+                            e.adminNoticia = true;
+                        }
                         if (e.titulo.length > 25){
                             e.titulo =
                                 e.titulo.substring(0, 25) + "...";
                         }
-                        if (e.descripcion.length > 80) {
+                        if (e.subtitulo.length > 80) {
                             e.descripcion =
                                 e.descripcion.substring(0, 80) + "...";;
                         }
                     });
 
-                    return h.view('anuncios',
+                    return h.view('noticias',
                         {
                             usuario: 'jordán',
-                            anuncios: anunciosEjemplo
+                            noticias: noticiasEjemplo
                         }, { layout: 'base'} );
                 }
             },
@@ -382,9 +388,54 @@ module.exports = {
             },
             {
                 method: 'GET',
-                path: '/anuncio/{id}',
+                path: '/detalle/{id}',
                 handler: async  (req, h) => {
-                    return 'Anuncio id: ' + req.params.id;
+                    comentariosEjemplo = [
+                        {comentario: "Comentario a cerca de ...", usuario: "Pepe", valoracion: 5, noticia: "89rtgerjg54ierñwolj"},
+                        {comentario: "Comentario sobre el deporte ...", usuario: "Juan", valoracion: 8, noticia: "89rtgerjg54ierñwolj"},
+                        {comentario: "Comentario a cerca de ...", usuario: "Julia", valoracion: 9, noticia: "89rtgerjg54ierñwolj"},
+                    ]
+
+                    var criterioComentario = {
+                        "noticia" : req.params.id
+                    }
+                    await repositorio.conexion()
+                        .then((db) => repositorio.obtenerComentarios(db, criterioComentario))
+                        .then((comentarios) => {
+                            comentariosEjemplo = comentarios;
+                        })
+
+                    noticiaEjemplo = {
+                        titulo: "titulo",
+                        subtitulo: "subtitulo",
+                        usuario: "usuario",
+                        categoria: "categoria",
+                        fecha: "fecha",
+                        cuerpo: "cuerpo"
+                    }
+                    var  criterio = {
+                        "_id" : require("mongodb").ObjectID(req.params.id)
+                    }
+                    await repositorio.conexion()
+                        .then((db) => repositorio.obtenerNoticias(db, criterio))
+                        .then((noticias) => {
+                            noticiaEjemplo = noticias[0];
+                        })
+
+                    comentariosEjemplo.forEach( (e) => {
+                        if (e.usuario == req.state["session-id"].usuario ||
+                            noticiaEjemplo.usuario == req.state["session-id"].usuario){
+                            e.borrar = true;
+                        }
+                    });
+
+                    return h.view('detalle',
+                        {
+                            usuario: 'jordán',
+                            noticia: noticiaEjemplo,
+                            comentarios: comentariosEjemplo,
+                            numeroComentarios: comentariosEjemplo.length,
+                        }, { layout: 'base'} );
                 }
             },
             {
@@ -395,7 +446,37 @@ module.exports = {
                         { usuario: 'jordán'},
                         { layout: 'base'});
                 }
-            }
+            },
+            {
+                method: 'POST',
+                path: '/publicarComentario',
+                options : {
+                    auth: 'auth-registrado'
+                },
+                handler: async (req, h) => {
+
+                    idNot = req.payload.idNoticia
+                    comentario = {
+                        usuario: req.auth.credentials ,
+                        valoracion: req.payload.valoracion,
+                        comentario: req.payload.comentario,
+                        noticia: idNot
+                    }
+
+                    await repositorio.conexion()
+                        .then((db) => repositorio.insertarComentario(db, comentario))
+                        .then((id) => {
+                            respuesta = "";
+                            if (id == null) {
+                                respuesta =  h.redirect('/detalle/'+ idNot + '?mensaje="Error al añadir el comentario"')
+                            } else {
+                                respuesta = h.redirect('/detalle/' + idNot + '?mensaje="Comentario añadido correctamente"')
+                                idNoticia = id;
+                            }
+                        })
+                    return respuesta;
+                }
+            },
         ])
     }
 }

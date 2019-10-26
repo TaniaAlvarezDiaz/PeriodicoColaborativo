@@ -1,188 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f292b6c3-8394-4381-b46a-cdb750a0aba9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/detalles.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/detalles.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/formulario.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/formulario.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+    <list default="true" id="f292b6c3-8394-4381-b46a-cdb750a0aba9" name="Default" comment="Añadido comentario">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index2.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tabla.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tabla.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repositorio.js" beforeDir="false" afterPath="$PROJECT_DIR$/repositorio.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/layout/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/layout/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/misanuncios.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/misanuncios.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/registro.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/registro.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/anuncios.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/noticias.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/misanuncios.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/misnoticias.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/modificar.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/modificar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/publicar.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/publicar.html" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/.tmp/" />
-    <ignored path="$PROJECT_DIR$/temp/" />
-    <ignored path="$PROJECT_DIR$/tmp/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-1038897231">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="2" />
-          <entry key="project.open.time.1" value="2" />
-          <entry key="project.opened" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="html" value="9" />
-          <entry key="js" value="57" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="HTML" value="9" />
-          <entry key="JavaScript" value="57" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="html" value="11" />
-          <entry key="js" value="7" />
-          <entry key="txt" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="HTML" value="11" />
-          <entry key="JavaScript" value="7" />
-          <entry key="PLAIN_TEXT" value="1" />
-        </counts>
-      </usages-collector>
-    </session>
-    <session id="852575090">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="1" />
-          <entry key="project.open.time.21" value="1" />
-          <entry key="project.opened" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="html" value="1" />
-          <entry key="js" value="3" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="HTML" value="1" />
-          <entry key="JavaScript" value="3" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="html" value="266" />
-          <entry key="js" value="678" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="HTML" value="266" />
-          <entry key="JavaScript" value="678" />
-        </counts>
-      </usages-collector>
-    </session>
-    <session id="1610762417">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="2" />
-          <entry key="project.open.time.13" value="1" />
-          <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="2" />
-        </counts>
-      </usages-collector>
-    </session>
-    <session id="-235352631">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.open.time.0" value="1" />
-          <entry key="project.opened" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="html" value="4" />
-          <entry key="js" value="5" />
-          <entry key="ts" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="HTML" value="4" />
-          <entry key="JavaScript" value="5" />
-          <entry key="TypeScript" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="html" value="217" />
-          <entry key="js" value="429" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="HTML" value="217" />
-          <entry key="JavaScript" value="429" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.js.language.service.starts">
-        <counts>
-          <entry key="TypeScriptServerServiceImpl" value="1" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="57" column="21" lean-forward="true" selection-start-line="57" selection-start-column="21" selection-end-line="57" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/routes.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
-              <caret line="265" column="42" lean-forward="true" selection-start-line="265" selection-start-column="42" selection-end-line="265" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/repositorio.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="70" column="4" selection-start-line="70" selection-start-column="4" selection-end-line="70" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/registro.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="35" column="16" selection-start-line="35" selection-start-column="16" selection-end-line="39" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+  <component name="FavoritesManager">
+    <favorites_list name="PeriodicoColaborativo" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -193,126 +29,18 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>credenti</find>
-      <find>usuarioAutenticado</find>
-      <find>view</find>
-      <find>accept</find>
-      <find>auth</find>
-      <find>auth-</find>
-      <find>req.cookieAuth</find>
-      <find>login</find>
-      <find>return</find>
-      <find>Error</find>
-      <find>Servidor loc</find>
-      <find>/modificar</find>
-      <find>mensaje</find>
-      <find>/publicar</find>
-      <find>{id}/modificar</find>
-      <find>obtenerAnunciosPg</find>
-      <find>/misanu</find>
-      <find>Wallapap</find>
-      <find>wallapep</find>
-      <find>E-mail...</find>
-      <find>Password...</find>
-      <find>Publicar anuncio</find>
-      <find>Mis anuncios</find>
-      <find>usuario</find>
-      <find>/login</find>
-      <find>/registro</find>
-      <find>/anuncios</find>
-      <find>obtener</find>
-      <find>/misanuncios</find>
-      <find>registro</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>Periodico</replace>
-      <replace>Username</replace>
-      <replace>Password</replace>
-      <replace>Publicar noticia</replace>
-      <replace>/noticias</replace>
-      <replace>/misnoticias</replace>
-    </replaceStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/public/detalles.html" />
-        <option value="$PROJECT_DIR$/views/login.html" />
-        <option value="$PROJECT_DIR$/views/modificar.html" />
-        <option value="$PROJECT_DIR$/views/misanuncios.html" />
-        <option value="$PROJECT_DIR$/views/anuncios.html" />
-        <option value="$PROJECT_DIR$/views/index.html" />
-        <option value="$PROJECT_DIR$/views/publicar.html" />
-        <option value="$PROJECT_DIR$/repositorio.js" />
-        <option value="$PROJECT_DIR$/views/layout/base.html" />
-        <option value="$PROJECT_DIR$/main.js" />
-        <option value="$PROJECT_DIR$/views/registro.html" />
-        <option value="$PROJECT_DIR$/routes.js" />
-      </list>
-    </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
     <exe-path />
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="NodeModulesDirectoryManager">
-    <handled-path value="$PROJECT_DIR$/node_modules" />
-  </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths>
-      <path value="$PROJECT_DIR$/package.json" />
-    </packageJsonPaths>
-  </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="256" />
-    <option name="width" value="1118" />
-    <option name="height" value="744" />
-  </component>
+  <component name="ProjectId" id="1SfCVwp13B0EUV25btmdrnNNKpc" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
-  </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="PeriodicoColaborativo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PeriodicoColaborativo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PeriodicoColaborativo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PeriodicoColaborativo" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PeriodicoColaborativo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PeriodicoColaborativo" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
@@ -320,11 +48,20 @@
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2018.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Usuario\Desktop\PeriodicoColaborativo\views" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Usuario\Downloads\web\public" />
       <recent name="C:\Users\jordansoy\WebstormProjects\web\public" />
@@ -343,13 +80,13 @@
     </option>
   </component>
   <component name="RunManager" selected="Node.js.main.js">
-    <configuration name="main.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-js-file="main.js" working-dir="$PROJECT_DIR$">
+    <configuration name="main.js" type="NodeJSConfigurationType" temporary="true" path-to-js-file="main.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
-    <configuration name="repositorio.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-js-file="repositorio.js" working-dir="$PROJECT_DIR$">
+    <configuration name="repositorio.js" type="NodeJSConfigurationType" temporary="true" path-to-js-file="repositorio.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
-    <configuration name="routes.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-js-file="routes.js" working-dir="$PROJECT_DIR$">
+    <configuration name="routes.js" type="NodeJSConfigurationType" temporary="true" path-to-js-file="routes.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
     <list>
@@ -388,172 +125,32 @@
       <workItem from="1571855648970" duration="132000" />
       <workItem from="1571863069856" duration="300000" />
       <workItem from="1571924976127" duration="4010000" />
+      <workItem from="1571945314129" duration="6393000" />
+      <workItem from="1572012754486" duration="12605000" />
+      <workItem from="1572038925845" duration="5144000" />
+      <workItem from="1572079688868" duration="11204000" />
+      <workItem from="1572098842987" duration="10031000" />
     </task>
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76817000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="256" y="0" width="1118" height="744" extended-state="0" />
-    <editor active="true" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.17407407" />
-      <window_info id="Structure" order="1" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="TypeScript" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2111293" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.5500849" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/uikit.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/subidas/test.png" />
-    <entry file="file://$PROJECT_DIR$/public/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2432">
-          <caret line="64" column="37" selection-start-line="64" selection-start-column="37" selection-end-line="64" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/tabla.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="47" selection-start-line="47" selection-end-line="80" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/modificar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="41" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/prueba.txt" />
-    <entry file="file://$PROJECT_DIR$/views/anuncios.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="55" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="29" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/publicar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="58" selection-start-line="3" selection-start-column="58" selection-end-line="3" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/formulario.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/index2.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/detalles.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="41" selection-start-line="41" selection-end-line="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/layout/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="150" column="50" lean-forward="true" selection-start-line="150" selection-start-column="50" selection-end-line="150" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/misanuncios.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="37" column="63" selection-start-line="37" selection-start-column="63" selection-end-line="37" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1789">
-          <caret line="128" column="43" selection-start-line="128" selection-start-column="43" selection-end-line="128" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/handlebars/types/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="53" column="18" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="57" column="21" lean-forward="true" selection-start-line="57" selection-start-column="21" selection-end-line="57" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/repositorio.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="70" column="4" selection-start-line="70" selection-start-column="4" selection-end-line="70" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/registro.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="35" column="16" selection-start-line="35" selection-start-column="16" selection-end-line="39" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="265" column="42" lean-forward="true" selection-start-line="265" selection-start-column="42" selection-end-line="265" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Añadido comentario" />
+    <option name="LAST_COMMIT_MESSAGE" value="Añadido comentario" />
   </component>
 </project>
