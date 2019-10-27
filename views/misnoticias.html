@@ -5,15 +5,15 @@
                 <thead>
                 <tr>
                     <th class="uk-table-expand">Titulo</th>
-                    <th class="uk-width-small">Precio</th>
+                    <th class="uk-width-small">Categoría</th>
                     <th class="uk-width-small">Opciones</th>
                 </tr>
                 </thead>
                 <tbody>
-                {{#each anuncios}}
+                {{#each noticias}}
                 <tr>
                     <td >{{ titulo }}</td>
-                    <td >{{ precio }}</td>
+                    <td >{{ categoria }}</td>
                     <td>
                         <a class="uk-link" href="/noticia/{{_id}}/compartir">
                             <span  uk-icon="social"></span>

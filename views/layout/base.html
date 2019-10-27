@@ -68,24 +68,19 @@
                             </span> Mis noticias
                         </a>
                     </li>
+                    </ul>
+                    <div class="uk-navbar-item">
+                        <a href="/publicar"
+                           class="uk-button uk-button-primary uk-visible@m">
+                            <span data-uk-icon="plus-circle"
+                                  class="uk-margin-small-right">
+                            </span>Publicar noticia
+                        </a>
+                    </div>
                     {{/if}}
-                </ul>
-                <div class="uk-navbar-item">
-                    <a href="/publicar"
-                       class="uk-button uk-button-primary uk-visible@m">
-                        <span data-uk-icon="plus-circle"
-                              class="uk-margin-small-right">
-                        </span>Publicar noticia
-                    </a>
-                </div>
 
                 <!-- Si llega la variable usuarioAutenticado muestra un cuadro con su nombre, sino muestra el boton de login-->
                 {{#if usuarioAutenticado}}
-               <!-- <div class="uk-navbar-item">
-                    <div class="uk-button uk-button-default uk-visible@m">
-                         {{usuarioAutenticado}}
-                    </div>
-                </div>-->
                 <div class="uk-inline">
                     <button class="uk-button uk-button-default" type="button">{{usuarioAutenticado}}</button>
                     <div uk-dropdown>
@@ -144,27 +139,25 @@
         </button>
         <ul class="uk-nav uk-nav-default">
             <li class="uk-nav-header">Inicio</li>
+            {{#if usuarioAutenticado}}
             <li>
-                <a href="/seguidos">
-                    <span class="uk-margin-small-right uk-icon"
-                          data-uk-icon="icon: heart">
-                    </span>Seguidos
+                <a href="/misdatos">
+                     <span data-uk-icon="user"
+                           class="uk-margin-small-right">
+                    </span>
+                    Mi perfil
                 </a>
             </li>
             <li>
-                <a href="/misnoticias">
-                    <span class="uk-margin-small-right uk-icon"
-                          data-uk-icon="icon: list">
-                    </span>Mis noticias
+                <a href="/desconectarse">
+                    <span data-uk-icon="sign-out"
+                          class="uk-margin-small-right">
+                    </span>
+                    Desconectarse
                 </a>
             </li>
-            <li>
-                <a href="/publicar">
-                    <span class="uk-margin-small-right uk-icon"
-                          data-uk-icon="icon: plus-circle">
-                    </span>Publicar noticia
-                </a>
-            </li>
+            {{/if}}
+            {{^usuarioAutenticado}}
             <li>
                 <a href="/login">
                     <span class="uk-margin-small-right uk-icon"
@@ -172,6 +165,7 @@
                     </span>Acceder
                 </a>
             </li>
+            {{/usuarioAutenticado}}
             <li class="uk-nav-header">Secciones</li>
             <li><a href="/noticias">Portada</a></li>
             <li><a href="/noticias">Nacional</a></li>

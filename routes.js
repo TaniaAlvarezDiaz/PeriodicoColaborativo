@@ -62,14 +62,16 @@ module.exports = {
                             lstUsuarios = usuarios;
                         })
 
+                    //Ordenar la lista de usuarios alfabeticamente
+                    lstUsuarios.sort((a, b) => a.usuario.localeCompare(b.usuario));
+
+                    //Buscar la noticia
                     criterio = {
-                        "_id" : require("mongodb").ObjectID(req.params.id),
-                        "usuario": req.state["session-id"].usuario
+                        "_id" : require("mongodb").ObjectID(req.params.id)
                     }
                     await repositorio.conexion()
                         .then((db) => repositorio.obtenerNoticias(db, criterio))
                         .then((noticias) => {
-
                             noticia = noticias[0];
                         })
 
@@ -90,7 +92,7 @@ module.exports = {
                 },
                 handler: async (req, h) => {
 
-                    var criterio = { "usuario" : req.state["session-id"].usuario };
+                    var criterio = { "usuarioDestino" : req.state["session-id"].usuario};
 
                     await repositorio.conexion()
                         .then((db) => repositorio.obtenerNoticiasCompartidas(db, criterio))
@@ -113,19 +115,22 @@ module.exports = {
                         })
 
                     // Recorte
-                    //**OJO modificar en funcion de los parametros de Pelayo
                     lstNoticias.forEach( (e) => {
-                        if (e.titulo.length > 25){
-                            e.titulo =
-                                e.titulo.substring(0, 25) + "...";
+                        if (e.usuario == req.state["session-id"].usuario) {
+                            e.adminNoticia = true;
                         }
-                        if (e.descripcion.length > 80) {
+
+                        if (e.titulo.length > 35){
+                            e.titulo =
+                                e.titulo.substring(0, 35) + "...";
+                        }
+                        if (e.subtitulo.length > 80) {
                             e.descripcion =
                                 e.descripcion.substring(0, 80) + "...";;
                         }
                     });
 
-                    return h.view('noticiascompartidas',
+                    return h.view('noticias',
                         {
                             usuarioAutenticado: req.state["session-id"].usuario,
                             noticias: lstNoticias
@@ -161,17 +166,20 @@ module.exports = {
                 path: '/eliminar/{id}/comentario/{noticia}',
                 handler: async (req, h) => {
 
-                    var criterio = { "_id" :
-                            require("mongodb").ObjectID(req.params.id) };
+                    var criterio = {"_id" : require("mongodb").ObjectID(req.params.id) };
 
                     await repositorio.conexion()
                         .then((db) => repositorio.eliminarComentario(db, criterio))
                         .then((resultado) => {
-                            console.log("Comentario eliminado")
+                            respuesta = "";
+                            if (resultado == null) {
+                                respuesta =  h.redirect('/detalle/'+ req.params.noticia + '?mensaje=Error al eliminar el comentario.&tipoMensaje=danger');
+                            } else {
+                                respuesta =  h.redirect('/detalle/'+ req.params.noticia + '?mensaje=Comentario eliminado correctamente.&tipoMensaje=sucess');
+                            }
                         })
-                    console.log(req.params.id)
-                    console.log(req.params.noticia)
-                    return h.redirect('/detalle/'+ req.params.noticia + '?mensaje="Comentario Eliminado Correctamente"')
+
+                    return respuesta;
                 }
             },
             {
@@ -185,15 +193,13 @@ module.exports = {
                 },
                 handler: async (req, h) => {
 
-                    // criterio de anucio a modificar
                     var criterio = {
                         "_id" : require("mongodb").ObjectID(req.params.id),
                         "usuario": req.state["session-id"].usuario
                     }
 
-                    // nuevos valores para los atributos
                     noticia = {
-                        usuario: req.auth.credentials ,
+                        usuario: req.auth.credentials,
                         titulo: req.payload.titulo,
                         subtitulo: req.payload.subtitulo,
                         categoria: req.payload.categoria,
@@ -206,11 +212,10 @@ module.exports = {
                     await repositorio.conexion()
                         .then((db) => repositorio.modificarNoticia(db,criterio,noticia))
                         .then((id) => {
-                            respuesta = "";
                             if (id == null) {
-                                respuesta =  h.redirect('/noticias?mensaje="Error al modificar la noticia"')
+                                respuesta =  h.redirect('/noticias?mensaje=Error al modificar la noticia.&tipoMensaje=danger')
                             } else {
-                                respuesta = h.redirect('/noticias?mensaje="Noticia modificada correctamente"')
+                                respuesta = h.redirect('/noticias?mensaje=Noticia modificada correctamente.&tipoMensaje=success')
                             }
                         })
 
@@ -248,7 +253,10 @@ module.exports = {
                         })
 
                     return h.view('modificar',
-                        { noticia: noticia},
+                        {
+                            noticia: noticia,
+                            usuarioAutenticado: req.state["session-id"].usuario
+                        },
                         { layout: 'base'} );
                 }
             },
@@ -274,15 +282,14 @@ module.exports = {
 
                     // await no continuar hasta acabar esto
                     // Da valor a respuesta
-
                     await repositorio.conexion()
                         .then((db) => repositorio.insertarNoticia(db, noticia))
                         .then((id) => {
                             respuesta = "";
                             if (id == null) {
-                                respuesta =  h.redirect('/misnoticias?mensaje="Error al insertar"')
+                                respuesta =  h.redirect('/misnoticias?mensaje=Error al publicar.&tipoMensaje=danger')
                             } else {
-                                respuesta = h.redirect('/misnoticias?mensaje="Noticia Insertada"')
+                                respuesta = h.redirect('/misnoticias?mensaje=Noticia publicada.&tipoMensaje=success')
                                 idNoticia = id;
                             }
                         })
@@ -290,8 +297,7 @@ module.exports = {
                     binario = req.payload.foto._data;
                     extension = req.payload.foto.hapi.filename.split('.')[1];
 
-                    await module.exports.utilSubirFichero(
-                        binario, idNoticia, extension);
+                    await module.exports.utilSubirFichero(binario, idNoticia, extension);
 
                     return respuesta;
                 }
@@ -304,7 +310,9 @@ module.exports = {
                 },
                 handler: async (req, h) => {
                     return h.view('publicar',
-                        { usuario: 'jordán'},
+                        {
+                            usuarioAutenticado: req.state["session-id"].usuario
+                        },
                         { layout: 'base'});
                 }
             },
@@ -418,7 +426,6 @@ module.exports = {
                                 }
                             })
                     }
-                //////PRUEBA
                     return respuesta;
                 }
             },
@@ -443,10 +450,9 @@ module.exports = {
                         .then((noticias, total) => {
                             noticiasEjemplo = noticias;
 
-                            pgUltima = noticiasEjemplo.total/2;
-                            // La página 2.5 no existe
+                            pgUltima = noticiasEjemplo.total/5;
                             // Si excede sumar 1 y quitar los decimales
-                            if (pgUltima % 2 > 0 ){
+                            if (pgUltima % 5 > 0 ){
                                 pgUltima = Math.trunc(pgUltima);
                                 pgUltima = pgUltima+1;
                             }
@@ -466,7 +472,7 @@ module.exports = {
                     return h.view('misnoticias',
                         {
                             noticias: noticiasEjemplo,
-                            usuarioAutenticado: req.auth.credentials,
+                            usuarioAutenticado: req.state["session-id"].usuario,
                             paginas : paginas
                         },
                         { layout: 'base'} );
@@ -493,19 +499,19 @@ module.exports = {
                         if (e.usuario == req.state["session-id"].usuario) {
                             e.adminNoticia = true;
                         }
-                        if (e.titulo.length > 25){
+                        if (e.titulo.length > 35){
                             e.titulo =
-                                e.titulo.substring(0, 25) + "...";
+                                e.titulo.substring(0, 35) + "...";
                         }
                         if (e.subtitulo.length > 80) {
                             e.descripcion =
-                                e.descripcion.substring(0, 80) + "...";;
+                                e.descripcion.substring(0, 80) + "...";
                         }
                     });
 
                     return h.view('noticias',
                         {
-                            usuario: 'jordán',
+                            usuarioAutenticado: req.state["session-id"].usuario,
                             noticias: noticiasEjemplo
                         }, { layout: 'base'} );
                 }
@@ -525,14 +531,13 @@ module.exports = {
 
                 handler: async  (req, h) => {
                     comentariosEjemplo = [
-                        {comentario: "Comentario a cerca de ...", usuario: "Pepe", valoracion: 5, noticia: "89rtgerjg54ierñwolj"},
+                        {comentario: "Comentario acerca de ...", usuario: "Pepe", valoracion: 5, noticia: "89rtgerjg54ierñwolj"},
                         {comentario: "Comentario sobre el deporte ...", usuario: "Juan", valoracion: 8, noticia: "89rtgerjg54ierñwolj"},
-                        {comentario: "Comentario a cerca de ...", usuario: "Julia", valoracion: 9, noticia: "89rtgerjg54ierñwolj"},
+                        {comentario: "Comentario acerca de ...", usuario: "Julia", valoracion: 9, noticia: "89rtgerjg54ierñwolj"},
                     ]
 
-                    var criterioComentario = {
-                        "noticia" : req.params.id
-                    }
+                    var criterioComentario = {"noticia" : req.params.id}
+
                     await repositorio.conexion()
                         .then((db) => repositorio.obtenerComentarios(db, criterioComentario))
                         .then((comentarios) => {
@@ -547,16 +552,16 @@ module.exports = {
                         fecha: "fecha",
                         cuerpo: "cuerpo"
                     }
-                    var  criterio = {
-                        "_id" : require("mongodb").ObjectID(req.params.id)
-                    }
+
+                    var  criterio = {"_id" : require("mongodb").ObjectID(req.params.id)}
+
                     await repositorio.conexion()
                         .then((db) => repositorio.obtenerNoticias(db, criterio))
                         .then((noticias) => {
                             noticiaEjemplo = noticias[0];
                         })
 
-                    comentariosEjemplo.forEach( (e) => {
+                    comentariosEjemplo.forEach((e) => {
                         if (e.usuario == req.state["session-id"].usuario ||
                             noticiaEjemplo.usuario == req.state["session-id"].usuario){
                             e.borrar = true;
@@ -565,8 +570,9 @@ module.exports = {
 
                     return h.view('detalle',
                         {
-                            usuario: 'jordán',
+                            usuarioAutenticado: req.state["session-id"].usuario,
                             noticia: noticiaEjemplo,
+                            noticiaId: require("mongodb").ObjectID(req.params.id),
                             comentarios: comentariosEjemplo,
                             numeroComentarios: comentariosEjemplo.length,
                         }, { layout: 'base'} );
@@ -576,8 +582,33 @@ module.exports = {
                 method: 'GET',
                 path: '/',
                 handler: async (req, h) => {
-                    return h.view('index',
-                        { usuario: 'jordán'},
+
+                    criterio = {}
+
+                    await repositorio.conexion()
+                        .then((db) => repositorio.obtenerNoticias(db, criterio))
+                        .then((noticias) => {
+                            lstNoticias = noticias;
+                        })
+
+                    // Recorte
+                    lstNoticias.forEach( (e) => {
+                        if (e.titulo.length > 35){
+                            e.titulo =
+                                e.titulo.substring(0, 35) + "...";
+                        }
+                        if (e.subtitulo.length > 80) {
+                            e.descripcion =
+                                e.descripcion.substring(0, 80) + "...";
+                        }
+                    });
+
+                    return h.view('noticias',
+                        {
+                            //Revisar, debemos pasarselo si hay un usuario en sesión
+                           // usuarioAutenticado: req.state["session-id"].usuario,
+                            noticias: lstNoticias
+                        },
                         { layout: 'base'});
                 }
             },
@@ -602,9 +633,9 @@ module.exports = {
                         .then((id) => {
                             respuesta = "";
                             if (id == null) {
-                                respuesta =  h.redirect('/detalle/'+ idNot + '?mensaje="Error al añadir el comentario"')
+                                respuesta =  h.redirect('/detalle/'+ idNot + '?mensaje=Error al añadir el comentario.&tipoMensaje=danger')
                             } else {
-                                respuesta = h.redirect('/detalle/' + idNot + '?mensaje="Comentario añadido correctamente"')
+                                respuesta = h.redirect('/detalle/' + idNot + '?mensaje=Comentario añadido correctamente.&tipoMensaje=success')
                                 idNoticia = id;
                             }
                         })

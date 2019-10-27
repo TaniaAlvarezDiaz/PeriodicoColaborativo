@@ -1,3 +1,32 @@
+<nav class="uk-navbar-container" uk-navbar>
+    <div class="uk-navbar-left">
+        <ul class="uk-navbar-nav">
+            <li class="uk-active"><a href="#">Portada</a></li>
+            <li class="uk-parent"><a href="/noticias" name="criterio">Nacional</a></li>
+            <li class="uk-parent"><a href="/noticias" name="criterio">Internacional</a></li>
+            <li class="uk-parent"><a href="/noticias" name="criterio">Política</a></li>
+            <li class="uk-parent"><a href="/noticias" name="criterio">Economía</a></li>
+            <li class="uk-parent"><a href="/noticias" name="criterio">Sociedad</a></li>
+            <li class="uk-parent"><a href="/noticias" name="criterio">Cultura</a></li>
+            <li class="uk-parent"><a href="/noticias" name="criterio">Ciencia</a></li>
+            <li class="uk-parent"><a href="/noticias" name="criterio">Deportes</a></li>
+            <li class="uk-parent"><a href="/noticias" name="criterio">Televisión</a></li>
+            <li class="uk-parent"><a href="/noticias" name="criterio">Gente</a></li>
+            <li class="uk-parent"><a href="/noticias" name="criterio">Opinión</a></li>
+        </ul>
+    </div>
+    <div class="uk-navbar-right">
+        <div class="uk-navbar-nav">
+            <form class="uk-search uk-search-default uk-width-1-1" action="/noticias">
+                <span uk-search-icon></span>
+                <input class="uk-search-input"
+                       name="criterio"
+                       type="search" placeholder="Buscar...">
+            </form>
+        </div>
+    </div>
+</nav>
+
 <section class="uk-section uk-section-default">
     <div class="uk-container">
         <!-- sin incluir uk-grid no va el grid -->
@@ -22,14 +51,15 @@
                                         Más...
                                     </a>
                                 </div>
-                                {{#if adminNoticia }}
-                                <div class="uk-width-3-5">
-                                    <div class="uk-align-right">
+                                <div class="uk-width-3-5@m">
+                                    <div>
+                                        <a href="/noticia/{{ _id }}/compartir" class="uk-margin-small-right" ><span  uk-icon="social" title="Compartir"></span></a>
+                                        {{#if adminNoticia }}
                                         <a href="/noticia/{{ _id }}/modificar" class="uk-margin-small-right" ><span  uk-icon="pencil" title="Editar"></span></a>
                                         <a href="/detalle/{{ _id }}" ><span uk-icon="trash" title="Eliminar"></span></a>
+                                        {{/if}}
                                     </div>
                                 </div>
-                                {{/if}}
                             </div>
                         </div>
                     </div>

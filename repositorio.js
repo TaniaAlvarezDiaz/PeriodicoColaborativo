@@ -83,15 +83,14 @@ module.exports = {
         promise = new Promise((resolve, reject) => {
             var collection = db.collection('noticias');
             //Contar el numero de elementos para saber cuantas páginas poner
-            //Limit(2) es el número de elementos que queremos que nos de, en este caso 2 por página
+            //Limit es el número de elementos que queremos que nos de, en este caso 2 por página
             collection.count( criterio, (err, count) => {
-                collection.find(criterio).skip( (pg-1)*2 ).limit( 2 )
+                collection.find(criterio).skip( (pg-1)*5 ).limit( 5 )
                     .toArray( (err, result) => {
-
                         if (err) {
                             resolve(null);
                         } else {
-                            // lista de anuncios
+                            // lista de noticias
                             result.total = count;
                             resolve(result);
                         }
@@ -185,7 +184,6 @@ module.exports = {
         return promise;
     },
     modificarNoticia : async (db, criterio, noticia) => {
-
         promise = new Promise((resolve, reject) => {
             var collection = db.collection('noticias');
             collection.update(criterio, {$set: noticia}, (err, result) => {
