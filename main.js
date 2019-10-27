@@ -5,6 +5,8 @@ const Vision = require('@hapi/vision');
 const Cookie = require('@hapi/cookie'); //Autenticación
 const routes = require("./routes.js");
 const repositorio = require("./repositorio.js");
+const nodemailer = require("nodemailer");
+
 
 // Servidor
 const server = Hapi.server({
