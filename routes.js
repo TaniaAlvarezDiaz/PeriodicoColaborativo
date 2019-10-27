@@ -116,6 +116,10 @@ module.exports = {
 
                     // Recorte
                     lstNoticias.forEach( (e) => {
+
+                        //Indicar a la noticia que hay usuario autenticado
+                        e.usuarioAutenticado = req.state["session-id"].usuario;
+
                         if (e.usuario == req.state["session-id"].usuario) {
                             e.adminNoticia = true;
                         }
@@ -135,7 +139,7 @@ module.exports = {
                             {
                                 usuarioAutenticado: req.state["session-id"].usuario,
                                 noticias: lstNoticias,
-                                numero: noticiasEjemplo.length
+                                numero: lstNoticias.length
                             }, {layout: 'base'});
                     }
                     return h.view('noticiascompartidas',
@@ -185,22 +189,28 @@ module.exports = {
                     await repositorio.conexion()
                         .then((db) => repositorio.eliminarComentario(db, criterioComentario))
                         .then((resultado) => {
-                            console.log("Comentario eliminado")
+                            if (resultado == null) {
+                                return h.redirect('/noticias' + '?mensaje=Error al eliminar la noticia.&tipoMensaje=danger')
+                            }
                         })
 
                     await repositorio.conexion()
                         .then((db) => repositorio.eliminarNoticiaCompartida(db, criterioCompartido))
                         .then((resultado) => {
-                            console.log("Noticia compartida eliminada")
+                            if (resultado == null) {
+                                return h.redirect('/noticias' + '?mensaje=Error al eliminar la noticia.&tipoMensaje=danger')
+                            }
                         })
 
                     await repositorio.conexion()
                         .then((db) => repositorio.eliminarNoticia(db, criterio))
                         .then((resultado) => {
-                            console.log("Noticia eliminada")
+                            if (resultado == null) {
+                                return h.redirect('/noticias' + '?mensaje=Error al eliminar la noticia.&tipoMensaje=danger')
+                            }
                         })
 
-                    return h.redirect('/noticias' + '?mensaje="Noticia Eliminada Correctamente"')
+                    return h.redirect('/noticias' + '?mensaje=Noticia eliminada correctamente.&tipoMensaje=success')
                 }
             },
             {
@@ -550,6 +560,10 @@ module.exports = {
                     // Recorte
                     noticiasEjemplo.forEach( (e) => {
                         if (req.state["session-id"] != undefined) {
+
+                            //Indicar a la noticia que hay usuario autenticado
+                            e.usuarioAutenticado = req.state["session-id"].usuario;
+
                             if (e.usuario == req.state["session-id"].usuario) {
                                 e.adminNoticia = true;
                             }
