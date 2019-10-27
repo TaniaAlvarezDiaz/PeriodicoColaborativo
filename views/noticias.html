@@ -1,5 +1,5 @@
 <nav class="uk-navbar-container" uk-navbar>
-    <div class="uk-navbar-left">
+    <div class="uk-navbar-left uk-visible@m">
         <ul class="uk-navbar-nav">
             <li class="uk-active"><a href="#">Portada</a></li>
             <li class="uk-parent"><a href="/noticias" name="criterio">Nacional</a></li>
@@ -53,7 +53,9 @@
                                 </div>
                                 <div class="uk-width-3-5@m">
                                     <div>
+                                        {{#if usuarioAutenticado}}
                                         <a href="/noticia/{{ _id }}/compartir" class="uk-margin-small-right" ><span  uk-icon="social" title="Compartir"></span></a>
+                                        {{/if}}
                                         {{#if adminNoticia }}
                                         <a href="/noticia/{{ _id }}/modificar" class="uk-margin-small-right" ><span  uk-icon="pencil" title="Editar"></span></a>
                                         <a href="/detalle/{{ _id }}" ><span uk-icon="trash" title="Eliminar"></span></a>

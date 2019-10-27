@@ -496,8 +496,10 @@ module.exports = {
 
                     // Recorte
                     noticiasEjemplo.forEach( (e) => {
-                        if (e.usuario == req.state["session-id"].usuario) {
-                            e.adminNoticia = true;
+                        if (req.state["session-id"] != undefined) {
+                            if (e.usuario == req.state["session-id"].usuario) {
+                                e.adminNoticia = true;
+                            }
                         }
                         if (e.titulo.length > 35){
                             e.titulo =
@@ -509,11 +511,18 @@ module.exports = {
                         }
                     });
 
-                    return h.view('noticias',
-                        {
-                            usuarioAutenticado: req.state["session-id"].usuario,
-                            noticias: noticiasEjemplo
-                        }, { layout: 'base'} );
+                    if (req.state["session-id"] != undefined) {
+                        return h.view('noticias',
+                            {
+                                usuarioAutenticado: req.state["session-id"].usuario,
+                                noticias: noticiasEjemplo
+                            }, { layout: 'base'} );
+                    }else {
+                        return h.view('noticias',
+                            {
+                                noticias: noticiasEjemplo
+                            }, { layout: 'base'} );
+                    }
                 }
             },
             {
@@ -582,34 +591,7 @@ module.exports = {
                 method: 'GET',
                 path: '/',
                 handler: async (req, h) => {
-
-                    criterio = {}
-
-                    await repositorio.conexion()
-                        .then((db) => repositorio.obtenerNoticias(db, criterio))
-                        .then((noticias) => {
-                            lstNoticias = noticias;
-                        })
-
-                    // Recorte
-                    lstNoticias.forEach( (e) => {
-                        if (e.titulo.length > 35){
-                            e.titulo =
-                                e.titulo.substring(0, 35) + "...";
-                        }
-                        if (e.subtitulo.length > 80) {
-                            e.descripcion =
-                                e.descripcion.substring(0, 80) + "...";
-                        }
-                    });
-
-                    return h.view('noticias',
-                        {
-                            //Revisar, debemos pasarselo si hay un usuario en sesión
-                           // usuarioAutenticado: req.state["session-id"].usuario,
-                            noticias: lstNoticias
-                        },
-                        { layout: 'base'});
+                    return h.redirect('/noticias');
                 }
             },
             {

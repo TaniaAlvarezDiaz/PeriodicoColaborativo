@@ -47,13 +47,13 @@
         <nav class="uk-navbar" data-uk-navbar>
             <div class="uk-navbar-left">
                 <img width=30" height="30" src="images/uikit.svg" alt="">
-                <a class="uk-navbar-item uk-logo" href="/">Periodico</a>
+                <a class="uk-navbar-item uk-logo" href="/noticias">Periodico</a>
             </div>
 
             <div class="uk-navbar-right">
                 <!-- uk-visible@m Lo visualiza en pantallas más pequeñas de m-->
+                {{#if usuarioAutenticado}}
                 <ul class="uk-navbar-nav uk-visible@m">
-                    {{#if usuarioAutenticado}}
                     <li>
                         <a href="/noticiasCompartidas">
                             <span data-uk-icon="heart"
@@ -68,7 +68,6 @@
                             </span> Mis noticias
                         </a>
                     </li>
-                    </ul>
                     <div class="uk-navbar-item">
                         <a href="/publicar"
                            class="uk-button uk-button-primary uk-visible@m">
@@ -77,11 +76,12 @@
                             </span>Publicar noticia
                         </a>
                     </div>
-                    {{/if}}
+                </ul>
+                {{/if}}
 
                 <!-- Si llega la variable usuarioAutenticado muestra un cuadro con su nombre, sino muestra el boton de login-->
                 {{#if usuarioAutenticado}}
-                <div class="uk-inline">
+                <div class="uk-inline uk-visible@m">
                     <button class="uk-button uk-button-default" type="button">{{usuarioAutenticado}}</button>
                     <div uk-dropdown>
                         <ul class="uk-nav uk-dropdown-nav">
@@ -106,7 +106,7 @@
                 </div>
                 {{/if}}
                 {{^usuarioAutenticado}}
-                <div class="uk-navbar-item">
+                <div class="uk-navbar-item uk-visible@m">
                     <a href="/login"
                        class="uk-button uk-button-default uk-visible@m">
                         <span data-uk-icon="sign-in"
@@ -131,7 +131,7 @@
 <!-- Menú para movil - offCanvas -->
 <div id="offcanvas-nav"
      data-uk-offcanvas="flip: true; overlay: true">
-    <div class="uk-offcanvas-bar uk-offcanvas-bar-animation uk-offcanvas-slide">
+    <li class="uk-offcanvas-bar uk-offcanvas-bar-animation uk-offcanvas-slide">
         <button
                 class="uk-offcanvas-close uk-close uk-icon"
                 type="button"
@@ -140,6 +140,28 @@
         <ul class="uk-nav uk-nav-default">
             <li class="uk-nav-header">Inicio</li>
             {{#if usuarioAutenticado}}
+            <li>
+                <a href="/noticiasCompartidas">
+                            <span data-uk-icon="heart"
+                                  class="uk-margin-small-right">
+                            </span> Noticias compartidas
+                </a>
+            </li>
+            <li>
+                <a href="/misnoticias">
+                            <span data-uk-icon="list"
+                                  class="uk-margin-small-right">
+                            </span> Mis noticias
+                </a>
+            </li>
+            <li>
+                <a href="/publicar"
+                   class="uk-button uk-button-primary uk-visible@m">
+                            <span data-uk-icon="plus-circle"
+                                  class="uk-margin-small-right">
+                            </span>Publicar noticia
+                </a>
+            </li>
             <li>
                 <a href="/misdatos">
                      <span data-uk-icon="user"
