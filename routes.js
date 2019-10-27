@@ -124,9 +124,9 @@ module.exports = {
                             e.adminNoticia = true;
                         }
 
-                        if (e.titulo.length > 35){
+                        if (e.titulo.length > 25){
                             e.titulo =
-                                e.titulo.substring(0, 35) + "...";
+                                e.titulo.substring(0, 25) + "...";
                         }
                         if (e.subtitulo.length > 80) {
                             e.descripcion =
@@ -568,9 +568,9 @@ module.exports = {
                                 e.adminNoticia = true;
                             }
                         }
-                        if (e.titulo.length > 35){
+                        if (e.titulo.length > 25){
                             e.titulo =
-                                e.titulo.substring(0, 35) + "...";
+                                e.titulo.substring(0, 25) + "...";
                         }
                         if (e.subtitulo.length > 80) {
                             e.descripcion =
