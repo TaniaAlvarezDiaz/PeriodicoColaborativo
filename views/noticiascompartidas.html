@@ -1,0 +1,54 @@
+<section class="uk-section uk-section-default">
+    <div class="uk-container">
+
+        <!-- sin incluir uk-grid no va el grid -->
+        <div class="uk-child-width-1-2@m" uk-grid >
+
+            {{#if numero}}
+            {{#each noticias}}
+            <div >
+                <div style="height:350px;"
+                     class="uk-card uk-card-default uk-grid uk-grid-collapse uk-child-width-1-2 uk-margin">
+                    <div class="uk-card-media-left uk-cover-container">
+                        <img style="height:350px;"
+                             class="uk-cover" src="/subidas/{{ _id }}.png">
+                    </div>
+                    <div>
+                        <div class="uk-card-body">
+                            <h3 class="uk-card-title">{{ titulo }}</h3>
+                            <p>{{ subtitulo }}.</p>
+                            <p><strong>Autor: {{ usuario }}</strong></p>
+                            <div class="uk-grid uk-margin uk-child-width-1-2">
+                                <div class="uk-width-2-5 ">
+                                    <a class="uk-button uk-button-primary uk-button-small"
+                                       href="/detalle/{{ _id }}">
+                                        Más...
+                                    </a>
+                                </div>
+                                <div class="uk-width-3-5@m">
+                                    <div>
+                                        {{#if usuarioAutenticado}}
+                                        <a href="/noticia/{{ _id }}/compartir" class="uk-margin-small-right" ><span  uk-icon="social" title="Compartir"></span></a>
+                                        {{/if}}
+                                        {{#if adminNoticia }}
+                                        <a href="/noticia/{{ _id }}/modificar" class="uk-margin-small-right" ><span  uk-icon="pencil" title="Editar"></span></a>
+                                        <a href="/eliminar/{{ _id }}/noticia" ><span uk-icon="trash" title="Eliminar"></span></a>
+                                        {{/if}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+
+            {{/if}}
+            {{^numero}}
+            <div class="uk-align-center">
+                <img src="/images/sinResultados.PNG">
+            </div>
+            {{/numero}}
+        </div>
+    </div>
+</section>

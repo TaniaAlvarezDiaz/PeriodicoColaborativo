@@ -130,11 +130,20 @@ module.exports = {
                         }
                     });
 
-                    return h.view('noticias',
+                    if(lstNoticias.length != 0) {
+                        return h.view('noticiascompartidas',
+                            {
+                                usuarioAutenticado: req.state["session-id"].usuario,
+                                noticias: lstNoticias,
+                                numero: noticiasEjemplo.length
+                            }, {layout: 'base'});
+                    }
+                    return h.view('noticiascompartidas',
                         {
                             usuarioAutenticado: req.state["session-id"].usuario,
                             noticias: lstNoticias
                         }, { layout: 'base'} );
+
                 }
             },
             {
@@ -159,6 +168,39 @@ module.exports = {
                             usuarioAutenticado: req.state["session-id"].usuario
                         },
                         { layout: 'base'} );
+                }
+            },
+            {
+                method: 'GET',
+                path: '/eliminar/{id}/noticia',
+                handler: async (req, h) => {
+
+                    var criterio = { "_id" :
+                            require("mongodb").ObjectID(req.params.id) };
+
+                    var criterioComentario = { "noticia" : req.params.id };
+
+                    var criterioCompartido = { "idNoticia": require("mongodb").ObjectID(req.params.id) };
+
+                    await repositorio.conexion()
+                        .then((db) => repositorio.eliminarComentario(db, criterioComentario))
+                        .then((resultado) => {
+                            console.log("Comentario eliminado")
+                        })
+
+                    await repositorio.conexion()
+                        .then((db) => repositorio.eliminarNoticiaCompartida(db, criterioCompartido))
+                        .then((resultado) => {
+                            console.log("Noticia compartida eliminada")
+                        })
+
+                    await repositorio.conexion()
+                        .then((db) => repositorio.eliminarNoticia(db, criterio))
+                        .then((resultado) => {
+                            console.log("Noticia eliminada")
+                        })
+
+                    return h.redirect('/noticias' + '?mensaje="Noticia Eliminada Correctamente"')
                 }
             },
             {
@@ -484,9 +526,20 @@ module.exports = {
                 handler: async (req, h) => {
 
                     var criterio = {};
-                    if (req.query.criterio != null ){
-                        criterio = { "titulo" : {$regex : ".*"+req.query.criterio+".*"}};
+
+                    if(req.query.categoria != undefined) {
+                        criterio = {
+                            "categoria" : {$regex : ".*"+req.query.categoria+".*"}
+                        };
                     }
+
+                    if(req.query.titulo != undefined ||  req.query.usuario != undefined){
+                        criterio = {
+                            "titulo" : {$regex : ".*"+req.query.titulo +".*"},
+                            "usuario" : {$regex : ".*"+req.query.usuario +".*"}
+                        };
+                    }
+
                     await repositorio.conexion()
                         .then((db) => repositorio.obtenerNoticias(db, criterio))
                         .then((noticias) => {
@@ -511,6 +564,22 @@ module.exports = {
                         }
                     });
 
+                    if(noticiasEjemplo.length != 0){
+                        if (req.state["session-id"] != undefined) {
+                            return h.view('noticias',
+                                {
+                                    usuarioAutenticado: req.state["session-id"].usuario,
+                                    noticias: noticiasEjemplo,
+                                    numero: noticiasEjemplo.length
+                                }, { layout: 'base'} );
+                        }else {
+                            return h.view('noticias',
+                                {
+                                    noticias: noticiasEjemplo,
+                                    numero: noticiasEjemplo.length
+                                }, { layout: 'base'} );
+                        }
+                    }
                     if (req.state["session-id"] != undefined) {
                         return h.view('noticias',
                             {
@@ -571,20 +640,33 @@ module.exports = {
                         })
 
                     comentariosEjemplo.forEach((e) => {
-                        if (e.usuario == req.state["session-id"].usuario ||
-                            noticiaEjemplo.usuario == req.state["session-id"].usuario){
-                            e.borrar = true;
+                        if(req.state["session-id"] != undefined) {
+                            if (e.usuario == req.state["session-id"].usuario ||
+                                noticiaEjemplo.usuario == req.state["session-id"].usuario) {
+                                e.borrar = true;
+                            }
                         }
                     });
 
-                    return h.view('detalle',
-                        {
-                            usuarioAutenticado: req.state["session-id"].usuario,
-                            noticia: noticiaEjemplo,
-                            noticiaId: require("mongodb").ObjectID(req.params.id),
-                            comentarios: comentariosEjemplo,
-                            numeroComentarios: comentariosEjemplo.length,
-                        }, { layout: 'base'} );
+                    if(req.state["session-id"] != undefined) {
+                        return h.view('detalle',
+                            {
+                                usuarioAutenticado: req.state["session-id"].usuario,
+                                noticia: noticiaEjemplo,
+                                noticiaId: require("mongodb").ObjectID(req.params.id),
+                                comentarios: comentariosEjemplo,
+                                numeroComentarios: comentariosEjemplo.length,
+                            }, { layout: 'base'});
+                    }else {
+                        return h.view('detalle',
+                            {
+                                noticia: noticiaEjemplo,
+                                noticiaId: require("mongodb").ObjectID(req.params.id),
+                                comentarios: comentariosEjemplo,
+                                numeroComentarios: comentariosEjemplo.length,
+                            }, { layout: 'base'});
+                    }
+
                 }
             },
             {

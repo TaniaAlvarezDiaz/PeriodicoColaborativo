@@ -198,5 +198,33 @@ module.exports = {
         });
 
         return promise;
+    },
+    eliminarNoticia : async (db, criterio) => {
+        promise = new Promise((resolve, reject) => {
+            var collection = db.collection('noticias');
+            collection.remove(criterio, (err, result) => {
+                if (err) {
+                    resolve(null);
+                } else {
+                    resolve(result);
+                }
+                db.close();
+            });
+        });
+        return promise;
+    },
+    eliminarNoticiaCompartida : async (db, criterio) => {
+        promise = new Promise((resolve, reject) => {
+            var collection = db.collection('noticiasCompartidas');
+            collection.remove(criterio, (err, result) => {
+                if (err) {
+                    resolve(null);
+                } else {
+                    resolve(result);
+                }
+                db.close();
+            });
+        });
+        return promise;
     }
 }

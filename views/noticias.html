@@ -1,36 +1,59 @@
 <nav class="uk-navbar-container" uk-navbar>
     <div class="uk-navbar-left uk-visible@m">
         <ul class="uk-navbar-nav">
-            <li class="uk-active"><a href="#">Portada</a></li>
-            <li class="uk-parent"><a href="/noticias" name="criterio">Nacional</a></li>
-            <li class="uk-parent"><a href="/noticias" name="criterio">Internacional</a></li>
-            <li class="uk-parent"><a href="/noticias" name="criterio">Política</a></li>
-            <li class="uk-parent"><a href="/noticias" name="criterio">Economía</a></li>
-            <li class="uk-parent"><a href="/noticias" name="criterio">Sociedad</a></li>
-            <li class="uk-parent"><a href="/noticias" name="criterio">Cultura</a></li>
-            <li class="uk-parent"><a href="/noticias" name="criterio">Ciencia</a></li>
-            <li class="uk-parent"><a href="/noticias" name="criterio">Deportes</a></li>
-            <li class="uk-parent"><a href="/noticias" name="criterio">Televisión</a></li>
-            <li class="uk-parent"><a href="/noticias" name="criterio">Gente</a></li>
-            <li class="uk-parent"><a href="/noticias" name="criterio">Opinión</a></li>
+            <li class="uk-active"><a href="/noticias">Portada</a></li>
+            <li class="uk-parent"><a href="/noticias?categoria=nacional" name="categoria">Nacional</a></li>
+            <li class="uk-parent"><a href="/noticias?categoria=internacional" name="categoria">Internacional</a></li>
+            <li class="uk-parent"><a href="/noticias?categoria=politica" name="categoria">Politica</a></li>
+            <li class="uk-parent"><a href="/noticias?categoria=economia" name="categoria">Economía</a></li>
+            <li class="uk-parent"><a href="/noticias?categoria=sociedad" name="categoria">Sociedad</a></li>
+            <li class="uk-parent"><a href="/noticias?categoria=cultura" name="categoria">Cultura</a></li>
+            <li class="uk-parent"><a href="/noticias?categoria=ciencia" name="categoria">Ciencia</a></li>
+            <li class="uk-parent"><a href="/noticias?categoria=deportes" name="categoria">Deportes</a></li>
+            <li class="uk-parent"><a href="/noticias?categoria=television" name="categoria">Televisión</a></li>
+            <li class="uk-parent"><a href="/noticias?categoria=gente" name="categoria">Gente</a></li>
+            <li class="uk-parent"><a href="/noticias?categoria=opinion" name="categoria">Opinión</a></li>
         </ul>
-    </div>
-    <div class="uk-navbar-right">
-        <div class="uk-navbar-nav">
-            <form class="uk-search uk-search-default uk-width-1-1" action="/noticias">
-                <span uk-search-icon></span>
-                <input class="uk-search-input"
-                       name="criterio"
-                       type="search" placeholder="Buscar...">
-            </form>
-        </div>
     </div>
 </nav>
 
 <section class="uk-section uk-section-default">
     <div class="uk-container">
+
+        <div class="uk-inline uk-width-1-1 uk-align-center">
+            <div >
+                <form method="get" action="/noticias" class="uk-grid uk-margin">
+                    <div class="uk-width-2-5">
+                        <label class="uk-form-label">
+                            Título
+                        </label>
+                        <input class="uk-input"
+                               name="titulo"
+                               type="search" placeholder="Buscar título">
+                    </div>
+                    <div class="uk-width-2-5">
+                        <label class="uk-form-label">
+                            Autor
+                        </label>
+                        <input class="uk-input"
+                               name="usuario"
+                               type="search" placeholder="Buscar autor">
+                    </div>
+                    <div class="uk-width-1-5">
+                        <button class="uk-button uk-button-secondary
+                            uk-margin-small-top"
+                                type="submit"><span uk-search-icon></span>
+                            Buscar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <!-- sin incluir uk-grid no va el grid -->
         <div class="uk-child-width-1-2@m" uk-grid >
+
+            {{#if numero}}
             {{#each noticias}}
             <div >
                 <div style="height:350px;"
@@ -58,7 +81,7 @@
                                         {{/if}}
                                         {{#if adminNoticia }}
                                         <a href="/noticia/{{ _id }}/modificar" class="uk-margin-small-right" ><span  uk-icon="pencil" title="Editar"></span></a>
-                                        <a href="/detalle/{{ _id }}" ><span uk-icon="trash" title="Eliminar"></span></a>
+                                        <a href="/eliminar/{{ _id }}/noticia" ><span uk-icon="trash" title="Eliminar"></span></a>
                                         {{/if}}
                                     </div>
                                 </div>
@@ -68,6 +91,13 @@
                 </div>
             </div>
             {{/each}}
+
+            {{/if}}
+            {{^numero}}
+            <div class="uk-align-center">
+                <img src="/images/sinResultados.PNG">
+            </div>
+            {{/numero}}
         </div>
     </div>
 </section>
