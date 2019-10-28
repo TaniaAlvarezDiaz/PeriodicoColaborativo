@@ -8,6 +8,7 @@ const repositorio = require("./repositorio.js");
 const nodemailer = require("nodemailer");
 
 
+
 // Servidor
 const server = Hapi.server({
     port: 8090,
@@ -23,6 +24,16 @@ server.method({
     },
     options: {}
 });
+
+// Declarar metodos comunes
+server.method({
+    name: 'getNodemailer',
+    method: () => {
+        return nodemailer;
+    },
+    options: {}
+});
+
 
 const iniciarServer = async () => {
     try {

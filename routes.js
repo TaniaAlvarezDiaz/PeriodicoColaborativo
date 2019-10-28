@@ -1,6 +1,6 @@
 module.exports = {
     name: 'MiRouter',
-    utilSubirFichero : async (binario, nombre, extension) => {
+utilSubirFichero : async (binario, nombre, extension) => {
         return new Promise((resolve, reject) => {
             nombre = nombre + "." + extension;
             require('fs').writeFile('./public/subidas/'+nombre, binario, err => {
@@ -14,6 +14,8 @@ module.exports = {
     register: async (server, options) => {
 
         repositorio = server.methods.getRepositorio();
+        nodemailer = server.methods.getNodemailer();
+        process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
         server.route([
             {
@@ -39,7 +41,61 @@ module.exports = {
                             } else {
                                 respuesta = h.redirect('/misnoticias?mensaje=Noticia compartida.&tipoMensaje=success')
                             }
+                        });
+
+                    var criterio = {
+                        "usuario": noticiaCompartida.usuarioDestino
+                    }
+
+                    await repositorio.conexion()
+                        .then((db) => repositorio.obtenerUsuarios(db, criterio))
+                        .then((usuarios) => {
+                            usuarioDes = usuarios[0];
                         })
+
+                    criterio = {
+                        "usuario": noticiaCompartida.usuario
+                    }
+
+                    await repositorio.conexion()
+                        .then((db) => repositorio.obtenerUsuarios(db, criterio))
+                        .then((usuarios) => {
+                            usuarioFrom = usuarios[0];
+                        })
+
+                    criterio = {
+                        "_id": noticiaCompartida.idNoticia
+                    }
+
+                    await repositorio.conexion()
+                        .then((db) => repositorio.obtenerNoticias(db, criterio))
+                        .then((noticias) => {
+                            noticia = noticias[0];
+                        })
+
+                    var transporter = nodemailer.createTransport({
+                        service: 'gmail',
+                        auth: {
+                            user: 'periodicomiw@gmail.com',
+                            pass: 'pelayotania2*'
+                        }
+                    });
+                    var mailOptions = {
+                        from: 'periodicomiw@gmail.com',
+                        to: usuarioDes.email,
+                        subject: 'Noticia Compartida ',
+                        text: 'El usuario ' +  usuarioFrom.nombre + ' ' + usuarioFrom.apellidos + ' te ha compartido' +
+                            ' la siguiente noticia:\n\n' + noticia.titulo + '\n\n' + noticia.subtitulo + '\n\n' +
+                            noticia.cuerpo + '\n\n' + 'Esperamos que la noticia le parezca interesante.',
+                    };
+                    transporter.sendMail(mailOptions, function(error, info){
+                        if (error) {
+                            console.log("FALLO AL ENVIAR EL MAIL")
+                            console.log(error)
+                        } else {
+                            console.log("EMAIL ENVIADO CORRECTAMENTE")
+                        }
+                    });
 
                     return respuesta;
                 }
@@ -129,8 +185,8 @@ module.exports = {
                                 e.titulo.substring(0, 25) + "...";
                         }
                         if (e.subtitulo.length > 80) {
-                            e.descripcion =
-                                e.descripcion.substring(0, 80) + "...";;
+                            e.subtitulo =
+                                e.subtitulo.substring(0, 80) + "...";;
                         }
                     });
 
@@ -573,36 +629,32 @@ module.exports = {
                                 e.titulo.substring(0, 25) + "...";
                         }
                         if (e.subtitulo.length > 80) {
-                            e.descripcion =
-                                e.descripcion.substring(0, 80) + "...";
+                            e.subtitulo =
+                                e.subtitulo.substring(0, 80) + "...";
                         }
                     });
 
-                    if(noticiasEjemplo.length != 0){
-                        if (req.state["session-id"] != undefined) {
-                            return h.view('noticias',
-                                {
-                                    usuarioAutenticado: req.state["session-id"].usuario,
-                                    noticias: noticiasEjemplo,
-                                    numero: noticiasEjemplo.length
-                                }, { layout: 'base'} );
-                        }else {
-                            return h.view('noticias',
-                                {
-                                    noticias: noticiasEjemplo,
-                                    numero: noticiasEjemplo.length
-                                }, { layout: 'base'} );
-                        }
+                    if(req.state["session-id"] == undefined){
+                        user = null;
                     }
-                    if (req.state["session-id"] != undefined) {
+                    else{
+                        user = req.state["session-id"].usuario;
+                    }
+                    if(user == ""){
+                        user = null;
+                    }
+                    if(noticiasEjemplo.length != 0){
                         return h.view('noticias',
                             {
-                                usuarioAutenticado: req.state["session-id"].usuario,
-                                noticias: noticiasEjemplo
+                                usuarioAutenticado: user,
+                                noticias: noticiasEjemplo,
+                                numero: noticiasEjemplo.length
                             }, { layout: 'base'} );
-                    }else {
+                    }
+                    else{
                         return h.view('noticias',
                             {
+                                usuarioAutenticado: user,
                                 noticias: noticiasEjemplo
                             }, { layout: 'base'} );
                     }
@@ -661,26 +713,23 @@ module.exports = {
                             }
                         }
                     });
-
-                    if(req.state["session-id"] != undefined) {
-                        return h.view('detalle',
-                            {
-                                usuarioAutenticado: req.state["session-id"].usuario,
-                                noticia: noticiaEjemplo,
-                                noticiaId: require("mongodb").ObjectID(req.params.id),
-                                comentarios: comentariosEjemplo,
-                                numeroComentarios: comentariosEjemplo.length,
-                            }, { layout: 'base'});
-                    }else {
-                        return h.view('detalle',
-                            {
-                                noticia: noticiaEjemplo,
-                                noticiaId: require("mongodb").ObjectID(req.params.id),
-                                comentarios: comentariosEjemplo,
-                                numeroComentarios: comentariosEjemplo.length,
-                            }, { layout: 'base'});
+                    if(req.state["session-id"] == undefined){
+                        user = null;
                     }
-
+                    else{
+                        user = req.state["session-id"].usuario;
+                    }
+                    if(user == ""){
+                        user = null;
+                    }
+                    return h.view('detalle',
+                        {
+                            usuarioAutenticado: user,
+                            noticia: noticiaEjemplo,
+                            noticiaId: require("mongodb").ObjectID(req.params.id),
+                            comentarios: comentariosEjemplo,
+                            numeroComentarios: comentariosEjemplo.length,
+                        }, { layout: 'base'});
                 }
             },
             {

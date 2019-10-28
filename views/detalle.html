@@ -16,6 +16,7 @@
         </article>
     </div>
 
+    {{#if usuarioAutenticado}}
     <a class="uk-button uk-button-primary uk-margin-medium-bottom" href="/noticia/{{noticiaId}}/compartir">
         <span data-uk-icon="social" class="uk-margin-small-right"></span>
         Compartir</a>
@@ -54,7 +55,7 @@
             </fieldset>
         </form>
     </div>
-
+    {{/if}}
     {{#each comentarios}}
         <article class="uk-comment uk-comment-primary uk-margin-small-top">
             <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
