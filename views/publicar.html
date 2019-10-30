@@ -48,7 +48,7 @@
                             Fecha
                         </label>
                         <input class="uk-input" type="date"
-                               name="fecha" required="true">
+                               name="fecha" required="true" data-uk-datepicker="{format:'DD.MM.YYYY'}">
                     </div>
                 </div>
                 <div class="uk-margin">
@@ -60,11 +60,85 @@
                 </div>
                 <div class="uk-margin">
                     <label class="uk-form-label">Foto</label>
+
                     <div uk-form-custom="target: true">
                         <input type="file" name="foto" accept="image/png">
                         <input class="uk-input" type="text"
                                placeholder="Selecciona fichero">
                     </div>
+
+                    <!-- Intento de arrastrar imagen, esta fallando -->
+                   <!-- <div class="js-upload uk-placeholder uk-text-center" uk-form-custom="target: true">
+                        <span uk-icon="icon: cloud-upload"></span>
+                        <span class="uk-text-middle">Arrastre y suelte la imagen aquí para añadirla o</span>
+                        <div uk-form-custom>
+                            <input type="file" name="foto" accept="image/png">
+                            <span class="uk-link">selecciona una.</span>
+                        </div>
+                    </div>
+
+                    <progress id="js-progressbar" class="uk-progress" value="0" max="100" hidden></progress>
+
+                    <script>
+
+                        var bar = document.getElementById('js-progressbar');
+
+                        UIkit.upload('.js-upload', {
+
+                            url: '',
+                            multiple: false,
+
+                            beforeSend: function () {
+                                console.log('beforeSend', arguments);
+                            },
+                            beforeAll: function () {
+                                console.log('beforeAll', arguments);
+                            },
+                            load: function () {
+                                console.log('load', arguments);
+                            },
+                            error: function () {
+                                console.log('error', arguments);
+                            },
+                            complete: function () {
+                                console.log('complete', arguments);
+                            },
+
+                            loadStart: function (e) {
+                                console.log('loadStart', arguments);
+
+                                bar.removeAttribute('hidden');
+                                bar.max = e.total;
+                                bar.value = e.loaded;
+                            },
+
+                            progress: function (e) {
+                                console.log('progress', arguments);
+
+                                bar.max = e.total;
+                                bar.value = e.loaded;
+                            },
+
+                            loadEnd: function (e) {
+                                console.log('loadEnd', arguments);
+
+                                bar.max = e.total;
+                                bar.value = e.loaded;
+                            },
+
+                            completeAll: function () {
+                                console.log('completeAll', arguments);
+
+                                setTimeout(function () {
+                                    bar.setAttribute('hidden', 'hidden');
+                                }, 1000);
+
+                                alert('Upload Completed');
+                            }
+
+                        });
+
+                    </script>-->
                 </div>
 
                 <button class="uk-button uk-button-primary uk-width-1-1

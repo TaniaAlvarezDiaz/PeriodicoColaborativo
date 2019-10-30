@@ -186,9 +186,12 @@ utilSubirFichero : async (binario, nombre, extension) => {
                         }
                         if (e.subtitulo.length > 80) {
                             e.subtitulo =
-                                e.subtitulo.substring(0, 80) + "...";;
+                                e.subtitulo.substring(0, 80) + "...";
                         }
                     });
+
+                    // Ordenar noticias por fecha (primero las más actuales)
+                    lstNoticias.sort((a, b) => a.fecha.localeCompare(b.fecha));
 
                     if(lstNoticias.length != 0) {
                         return h.view('noticiascompartidas',
@@ -633,6 +636,9 @@ utilSubirFichero : async (binario, nombre, extension) => {
                                 e.subtitulo.substring(0, 80) + "...";
                         }
                     });
+
+                    // Ordenar noticias por fecha (primero las más actuales)
+                    noticiasEjemplo.sort((a, b) => a.fecha.localeCompare(b.fecha));
 
                     if(req.state["session-id"] == undefined){
                         user = null;

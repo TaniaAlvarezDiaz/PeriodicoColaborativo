@@ -15,18 +15,17 @@
                     <td >{{ titulo }}</td>
                     <td >{{ categoria }}</td>
                     <td>
-                        <a class="uk-link" href="/noticia/{{_id}}/compartir">
-                            <span  uk-icon="social"></span>
-                            Compartir
+                        <div class="uk-flex">
+                        <a class="uk-link uk-width-1-3" href="/noticia/{{_id}}/compartir">
+                            <span style="color: #32d296" uk-icon="social" uk-tooltip="Compartir"></span>
                         </a> <br>
-                        <a class="uk-link" href="/noticia/{{_id}}/modificar">
-                            <span  uk-icon="pencil"></span>
-                            Modificar
+                        <a class="uk-link uk-width-1-3" href="/noticia/{{_id}}/modificar">
+                            <span  uk-icon="pencil" uk-tooltip="Modificar"></span>
                         </a> <br>
-                        <a class="uk-link" href="/eliminar/{{ _id }}/noticia">
-                            <span  uk-icon="trash"></span>
-                            Eliminar
+                        <a class="uk-link uk-width-1-3" href="/eliminar/{{ _id }}/noticia">
+                            <span  uk-icon="trash" uk-tooltip="Eliminar"></span>
                         </a>
+                        </div>
                     </td>
                 </tr>
                 {{/each}}

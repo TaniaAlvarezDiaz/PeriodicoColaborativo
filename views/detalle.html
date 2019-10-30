@@ -2,7 +2,7 @@
     <div class="uk-margin-small-bottom">
         <article class="uk-article">
             <h1 class="uk-article-title"><a class="uk-link-reset" href="">{{ noticia.titulo }}</a></h1>
-            <p class="uk-article-meta">Escrito por <strong>{{ noticia.usuario }}</strong> en fecha <strong>{{ noticia.fecha }}</strong></p>
+            <p class="uk-article-meta">Escrito por <strong>{{ noticia.usuario }}</strong> el <strong>{{ noticia.fecha }}</strong></p>
             <p class="uk-text-lead">{{ noticia.subtitulo }}</p>
             <p>{{ noticia.cuerpo }}</p>
             <div class="uk-grid-small uk-child-width-auto" uk-grid>
@@ -20,10 +20,6 @@
     <a class="uk-button uk-button-primary uk-margin-medium-bottom" href="/noticia/{{noticiaId}}/compartir">
         <span data-uk-icon="social" class="uk-margin-small-right"></span>
         Compartir</a>
-    <!--<button class="uk-button uk-button-primary uk-margin-medium-bottom" type="button" onclick="/noticia/{_id}/compartir">-->
-        <!--<span data-uk-icon="social" class="uk-margin-small-right"></span>-->
-        <!--Compartir-->
-    <!--</button>-->
 
     <div class="uk-card uk-card-default uk-card-body
         uk-width-1-1@m uk-align-left">

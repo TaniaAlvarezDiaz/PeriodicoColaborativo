@@ -21,9 +21,9 @@
     <div class="uk-container">
 
         <div class="uk-inline uk-width-1-1 uk-align-center">
-            <div >
+            <div>
                 <form method="get" action="/noticias" class="uk-grid uk-margin">
-                    <div class="uk-width-2-5">
+                    <div class="uk-width-1-2">
                         <label class="uk-form-label">
                             Título
                         </label>
@@ -31,7 +31,20 @@
                                name="titulo"
                                type="search" placeholder="Buscar título">
                     </div>
-                    <div class="uk-width-2-5">
+                    <div id="btnFilter" class="uk-width-1-2">
+                        <!--<a onclick="habilitarFiltroAutor()"uk-tooltip="Añadir filtro">-->
+                            <!--<span data-uk-icon="plus-square-o"-->
+                                  <!--class="uk-margin-small-right">-->
+                        <!--</span>-->
+                        <!--</a>-->
+                        <a href=""
+                           class="uk-icon-button uk-button-default">
+                        <span data-uk-icon="plus"
+                              class="uk-margin">
+                        </span>
+                        </a>
+                    </div>
+                    <div id="autorFilter" class="uk-width-1-2 uk-hidden">
                         <label class="uk-form-label">
                             Autor
                         </label>
@@ -39,8 +52,8 @@
                                name="usuario"
                                type="search" placeholder="Buscar autor">
                     </div>
-                    <div class="uk-width-1-5@m">
-                        <button class="uk-button uk-button-secondary uk-margin-top"
+                    <div class="uk-width-1-1">
+                        <button class="uk-button uk-button-secondary uk-width-1-1 uk-margin-small-top"
                                 type="submit"><span uk-search-icon></span>
                             Buscar
                         </button>
@@ -48,6 +61,13 @@
                 </form>
             </div>
         </div>
+
+        <script>
+            function habilitarFiltroAutor() {
+                document.getElementById("autorFilter").classList.remove("uk-hidden");
+                document.getElementById("btnFilter").classList.add("uk-hidden")
+            }
+        </script>
 
         <!-- sin incluir uk-grid no va el grid -->
         <div class="uk-child-width-1-2@m" uk-grid >
