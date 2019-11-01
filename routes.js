@@ -711,6 +711,31 @@ utilSubirFichero : async (binario, nombre, extension) => {
                             noticiaEjemplo = noticias[0];
                         })
 
+                    var cont = 0;
+                    var parrafos = [];
+                    var parrafo = {
+                        pa : ""
+                    };
+                    for(var i = 0; i<noticiaEjemplo.cuerpo.length; i++){
+                        if(noticiaEjemplo.cuerpo[i] == "."){
+                            cont ++;
+                        }
+                        parrafo.pa += noticiaEjemplo.cuerpo[i];
+                        if(cont == 4){
+                            parrafos.push(parrafo);
+                            parrafo = {
+                                pa : ""
+                            }
+                            cont= 0;
+                        }
+
+                        if(i == noticiaEjemplo.cuerpo.length-1){
+                            parrafos.push(parrafo);
+                        }
+
+                    }
+
+                    noticiaEjemplo.cuerpo = parrafos;
                     comentariosEjemplo.forEach((e) => {
                         if(req.state["session-id"] != undefined) {
                             if (e.usuario == req.state["session-id"].usuario ||

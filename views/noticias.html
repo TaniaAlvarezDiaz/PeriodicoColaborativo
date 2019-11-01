@@ -77,10 +77,32 @@
                     </div>
                     <div>
                         <div class="uk-card-body">
-                            <div class="uk-card-badge "><strong>{{ categoria }}</strong></div>
-                            <h3 class="uk-card-title uk-margin-medium-top">{{ titulo }}</h3>
+                            {{#ifEquals categoria "politica" }}
+                                <div class="uk-card-badge "><img style="height:40px;" src="/images/politica.png" title="Política"/></div>
+                            {{/ifEquals}}
+                            {{#ifEquals categoria "economia" }}
+                                <div class="uk-card-badge "><img style="height:40px;" src="/images/euro.png" title="Economía"/></div>
+                            {{/ifEquals}}
+                            {{#ifEquals categoria "deportes" }}
+                                <div class="uk-card-badge "><img style="height:40px;" src="/images/corriendo.png" title="Deportes"/></div>
+                            {{/ifEquals}}
+                            {{#ifEquals categoria "nacional" }}
+                                <div class="uk-card-badge "><img style="height:40px;" src="/images/espana.png" title="Nacional"/></div>
+                            {{/ifEquals}}
+                            {{#ifEquals categoria "internacional" }}
+                                <div class="uk-card-badge "><img style="height:40px;" src="/images/tierra.png" title="Internacional"/></div>
+                            {{/ifEquals}}
+                            {{#ifEquals categoria "sociedad" }}
+                                <div class="uk-card-badge "><img style="height:40px;" src="/images/corporacion.png" title="Sociedad"/></div>
+                            {{/ifEquals}}
+                            {{#ifEquals categoria "television" }}
+                                <div class="uk-card-badge "><img style="height:40px;" src="/images/television.png" title="Televisión"/></div>
+                            {{/ifEquals}}
+                            {{#ifEquals categoria "opinion" }}
+                                <div class="uk-card-badge "><img style="height:40px;" src="/images/opinion.png" title="Opinión"/></div>
+                            {{/ifEquals}}
+                            <h3 class="uk-card-title uk-margin-large-top">{{ titulo }}</h3>
                             <p>{{ subtitulo }}.</p>
-                            <p><strong>Autor: {{ usuario }}</strong></p>
                             <div class="uk-grid uk-margin uk-child-width-1-2">
                                 <div class="uk-width-2-5 ">
                                     <a class="uk-button uk-button-primary uk-button-small"
