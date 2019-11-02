@@ -420,9 +420,27 @@ utilSubirFichero : async (binario, nombre, extension) => {
                     auth: 'auth-registrado'
                 },
                 handler: async (req, h) => {
+
+                    let d = new Date().toLocaleString().split(" ")[0];
+                    d = d.split("-")
+                    fecha = d[0];
+                    if(d[1].length == 1){
+                        fecha += "-0" + d[1];
+                    }
+                    else{
+                        fecha += "-" + d[1]
+                    }
+                    if(d[2].length == 1){
+                        fecha += "-0" + d[2];
+                    }
+                    else{
+                        fecha += "-" + d[2]
+                    }
+
                     return h.view('publicar',
                         {
-                            usuarioAutenticado: req.state["session-id"].usuario
+                            usuarioAutenticado: req.state["session-id"].usuario,
+                            hoy : fecha
                         },
                         { layout: 'base'});
                 }
@@ -570,6 +588,17 @@ utilSubirFichero : async (binario, nombre, extension) => {
 
                         })
 
+                    noticiasEjemplo.forEach( (e) => {
+                        e.first = "false";
+                    });
+
+                    // Ordenar noticias por fecha (primero las más actuales)
+                    noticiasEjemplo.sort((a, b) => a.fecha.localeCompare(b.fecha));
+                    noticiasEjemplo.reverse();
+
+                    if(noticiasEjemplo.length != 0)
+                        noticiasEjemplo[0].first = "true";
+
                     //Aquí se decide que páginas aparecen en el fondo de la página. En este caso se muestran todas.
                     //Lo ideal es mostrar la primera, la ultima, la actual, la anterior y posterior.
                     var paginas = [];
@@ -618,6 +647,7 @@ utilSubirFichero : async (binario, nombre, extension) => {
 
                     // Recorte
                     noticiasEjemplo.forEach( (e) => {
+                        e.first = "false";
                         if (req.state["session-id"] != undefined) {
 
                             //Indicar a la noticia que hay usuario autenticado
@@ -639,6 +669,11 @@ utilSubirFichero : async (binario, nombre, extension) => {
 
                     // Ordenar noticias por fecha (primero las más actuales)
                     noticiasEjemplo.sort((a, b) => a.fecha.localeCompare(b.fecha));
+                    noticiasEjemplo.reverse();
+
+                    //A la primera se le añade un atributo para saber que es la primera
+                    if(noticiasEjemplo.length != 0)
+                        noticiasEjemplo[0].first = "true";
 
                     if(req.state["session-id"] == undefined){
                         user = null;

@@ -10,17 +10,17 @@
             {{/each}}
             <div class="uk-grid-small uk-child-width-auto" uk-grid>
                 <div>
-                    <a class="uk-button uk-button-text" href="#">{{ noticia.categoria }}</a>
+                    <p class="uk-text-uppercase" >{{ noticia.categoria }}</p>
                 </div>
                 <div>
-                    <a class="uk-button uk-button-text" href="#">{{numeroComentarios}} Comentarios.</a>
+                    <p class="uk-text-uppercase">{{numeroComentarios}} Comentarios.</p>
                 </div>
             </div>
         </article>
     </div>
 
     {{#if usuarioAutenticado}}
-    <a class="uk-button uk-button-primary uk-margin-medium-bottom" href="/noticia/{{noticiaId}}/compartir">
+    <a class="uk-button uk-button-secondary  uk-margin-medium-bottom" href="/noticia/{{noticiaId}}/compartir">
         <span data-uk-icon="social" class="uk-margin-small-right"></span>
         Compartir</a>
 
@@ -28,13 +28,32 @@
         uk-width-1-1@m uk-align-left">
         <form method="post" action="/publicarComentario">
             <fieldset class="uk-fieldset">
-                <div class="uk-grid uk-margin">
+                <div class="uk-margin">
                     <div class="uk-width-1-5">
-                        <label class="uk-form-label">
-                            Valoración
-                        </label>
-                        <input class="uk-input" type="number"
-                               name="valoracion" required="true" max="10" min="0">
+                        <div class="uk-inline uk-width-1-1">
+                            <label class="uk-form-label">Valoración (puntos)</label>
+                            <div class="uk-inline">
+                                <button class="uk-icon-button" uk-icon="info"></button>
+                                <div uk-dropdown >
+                                    <span class="uk-text-muted">La valoración que se le pone a la noticia que tiene en pantalla. Los valores máximo
+                                    y mínimo permitidos son 0 y 10</span>
+                                </div>
+                            </div>
+                            <select class="uk-select" name="valoracion"
+                                    required="true">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="uk-width-4-5">
                         <input class="uk-input" type="hidden"
@@ -42,6 +61,13 @@
                     </div>
                 </div>
                 <div class="uk-margin">
+                    <label class="uk-form-label">Comentario</label>
+                    <div class="uk-inline">
+                        <button class="uk-icon-button" uk-icon="info"></button>
+                        <div uk-dropdown >
+                            <span class="uk-text-muted">Comentario para el autor de la noticia a cerca de dicha noticia</span>
+                        </div>
+                    </div>
                     <textarea class="uk-textarea" rows="5"
                               name="comentario"
                               placeholder="Comentario"
@@ -61,7 +87,7 @@
                 <div class="uk-width-expand">
                     <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">{{usuario}}</a></h4>
                     <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                        <li><a href="#">Valoracion: {{valoracion}}</a></li>
+                        <li><a href="#">Valoracion: {{valoracion}} puntos</a></li>
                         {{#if borrar }}
                             <li><a href="/eliminar/{{_id}}/comentario/{{noticia}}"><span class="uk-margin-small-right" uk-icon="trash"></span>Eliminar</a></li>
                         {{/if}}

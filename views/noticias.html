@@ -7,11 +7,8 @@
             <li class="uk-parent"><a href="/noticias?categoria=politica" name="categoria">Politica</a></li>
             <li class="uk-parent"><a href="/noticias?categoria=economia" name="categoria">Economía</a></li>
             <li class="uk-parent"><a href="/noticias?categoria=sociedad" name="categoria">Sociedad</a></li>
-            <li class="uk-parent"><a href="/noticias?categoria=cultura" name="categoria">Cultura</a></li>
-            <li class="uk-parent"><a href="/noticias?categoria=ciencia" name="categoria">Ciencia</a></li>
             <li class="uk-parent"><a href="/noticias?categoria=deportes" name="categoria">Deportes</a></li>
             <li class="uk-parent"><a href="/noticias?categoria=television" name="categoria">Televisión</a></li>
-            <li class="uk-parent"><a href="/noticias?categoria=gente" name="categoria">Gente</a></li>
             <li class="uk-parent"><a href="/noticias?categoria=opinion" name="categoria">Opinión</a></li>
         </ul>
     </div>
@@ -69,8 +66,14 @@
             {{#if numero}}
             {{#each noticias}}
             <div >
-                <div style="height:400px;"
-                     class="uk-card uk-card-default uk-card-small uk-grid uk-grid-collapse uk-child-width-1-2 uk-margin uk-card-hover">
+                {{#ifEquals first "true" }}
+                    <div style="height:400px; background-color: #F9B774"
+                         class="uk-card uk-card-default uk-card-small uk-grid uk-grid-collapse uk-child-width-1-2 uk-margin uk-card-hover">
+                {{/ifEquals}}
+                {{#ifEquals first "false"}}
+                    <div style="height:400px;"
+                             class="uk-card uk-card-default uk-card-small uk-grid uk-grid-collapse uk-child-width-1-2 uk-margin uk-card-hover">
+                {{/ifEquals}}
                     <div class="uk-card-media-left uk-cover-container">
                         <img style="height:400px;"
                              class="uk-cover" src="/subidas/{{ _id }}.png">
@@ -105,7 +108,7 @@
                             <p>{{ subtitulo }}.</p>
                             <div class="uk-grid uk-margin uk-child-width-1-2">
                                 <div class="uk-width-2-5 ">
-                                    <a class="uk-button uk-button-primary uk-button-small"
+                                    <a class="uk-button uk-button-primary uk-button-small visitado"
                                        href="/detalle/{{ _id }}">
                                         Más...
                                     </a>

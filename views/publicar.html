@@ -8,26 +8,48 @@
                 <legend class="uk-legend">Nueva noticia </legend>
 
                 <div class="uk-margin">
-                    <label class="uk-form-label">
-                        <strong>Título</strong>
-                    </label>
-                    <input class="uk-input" type="text"
-                           name="titulo"
-                           placeholder="España asciende en el ranking..."
-                           required="true">
+                    <div class="uk-inline uk-width-1-1">
+                        <label class="uk-form-label">
+                            Título
+                        </label>
+                        <div class="uk-inline">
+                            <button class="uk-icon-button" uk-icon="info"></button>
+                            <div uk-dropdown >
+                                <span class="uk-text-muted">El título de la noticia con el que se "resume" brevemente el contenido.</span>
+                            </div>
+                        </div>
+                        <input class="uk-input" type="text"
+                               name="titulo"
+                               placeholder="Ej: España asciende en el ranking Europeo de habitantes."
+                               required="true">
+                    </div>
                 </div>
                 <div class="uk-margin">
-                    <label class="uk-form-label">
-                        <strong>Subtítulo</strong>
-                    </label>
-                    <input class="uk-input" type="text"
-                           name="subtitulo"
-                           placeholder="El ranking de países mostrado en el diario El Mundo..."
-                           required="true">
+                    <div class="uk-inline uk-width-1-1">
+                        <label class="uk-form-label">
+                            Subtítulo
+                        </label>
+                        <div class="uk-inline">
+                            <button class="uk-icon-button" uk-icon="info"></button>
+                            <div uk-dropdown >
+                                <span class="uk-text-muted">El subtítulo o entrada de la noticia.</span>
+                            </div>
+                        </div>
+                        <input class="uk-input" type="text"
+                               name="subtitulo"
+                               placeholder="Ej: El ranking de países mostrado en el diario El Mundo muestra el crecimiento de nuestro país"
+                               required="true">
+                    </div>
                 </div>
-                <div class="uk-grid uk-margin">
-                    <div class="uk-width-2-3@s">
-                        <label class="uk-form-label"><strong>Categoría</strong></label>
+                <div class="uk-margin">
+                    <div class="uk-inline uk-width-1-1">
+                        <label class="uk-form-label">Categoría</label>
+                        <div class="uk-inline">
+                            <button class="uk-icon-button" uk-icon="info"></button>
+                            <div uk-dropdown >
+                                <span class="uk-text-muted">La categoría a la que pertenece la noticia y con la que se podrá clasificar.</span>
+                            </div>
+                        </div>
                         <select class="uk-select" name="categoria"
                                 required="true">
                             <option value="deportes">Deportes</option>
@@ -40,23 +62,39 @@
                             <option value="television">Televisión</option>
                         </select>
                     </div>
-                    <div class="uk-width-1-3@s">
+                </div>
+                <div class="uk-margin">
+                    <div class="uk-inline uk-width-1-1">
                         <label class="uk-form-label">
-                            <strong>Fecha</strong>
+                            Fecha
                         </label>
-                        <input class="uk-input" type="date"
-                               name="fecha" required="true" data-uk-datepicker="{format:'DD.MM.YYYY'}">
+                        <div class="uk-inline">
+                            <button class="uk-icon-button" uk-icon="info"></button>
+                            <div uk-dropdown >
+                                <span class="uk-text-muted">Fecha de publicación o de ocurrencia de la noticia.</span>
+                            </div>
+                        </div><br>
+                        <input style="width: 35%;" class="uk-input" type="date"
+                               name="fecha" required="true" value="{{ hoy }}" data-uk-datepicker="{format:'DD.MM.YYYY'}">
                     </div>
                 </div>
                 <div class="uk-margin">
-                    <label class="uk-form-label"><strong>Cuerpo</strong></label>
-                    <textarea class="uk-textarea" rows="5"
-                              name="cuerpo"
-                              placeholder="El 28 de abril de 1998..."
-                              required="true"></textarea>
+                    <div class="uk-inline uk-width-1-1">
+                        <label class="uk-form-label">Cuerpo</label>
+                        <div class="uk-inline">
+                            <button class="uk-icon-button" uk-icon="info"></button>
+                            <div uk-dropdown >
+                                <span class="uk-text-muted">Descripción del resto de la noticia detalladamente.</span>
+                            </div>
+                        </div>
+                        <textarea class="uk-textarea" rows="5"
+                                  name="cuerpo"
+                                  placeholder="Ej: Según el ranking publicado por el Diario El Mundo, España sigue creciendo..."
+                                  required="true"></textarea>
+                    </div>
                 </div>
                 <div class="uk-margin">
-                    <label class="uk-form-label"><strong>Foto</strong></label>
+                    <label class="uk-form-label">Foto</label>
 
                     <div uk-form-custom="target: true">
                         <input type="file" name="foto" accept="image/png">

@@ -4,39 +4,69 @@
 
             <div class="uk-margin">
                 <div class="uk-inline uk-width-1-1">
+                    <label class="uk-form-label">Nombre</label>
                     <input class="uk-input" name="nombre"
-                           placeholder="Nombre" type="text" required>
+                           placeholder="Ej: Antonio José" type="text" required>
                 </div>
             </div>
 
             <div class="uk-margin">
                 <div class="uk-inline uk-width-1-1">
+                    <label class="uk-form-label">Apellidos</label>
                     <input class="uk-input" name="apellidos"
-                           placeholder="Apellidos" type="text" required>
+                           placeholder="Ej: Díaz García" type="text" required>
                 </div>
             </div>
 
             <div class="uk-margin">
                 <div class="uk-inline uk-width-1-1">
-                    <span class="uk-form-icon" uk-icon="icon: mail"></span>
-                    <input class="uk-input" name="email"
-                           placeholder="Email" type="email" required>
+                    <label class="uk-form-label">Email</label>
+                    <div class="uk-inline">
+                        <button class="uk-icon-button" uk-icon="info"></button>
+                        <div uk-dropdown >
+                            <span class="uk-text-muted">Para poder enviarte un correo cuando un usuario te comparta una noticia.</span>
+                        </div>
+                    </div>
+                    <div class="uk-inline uk-width-1-1">
+                        <span class="uk-form-icon" uk-icon="icon: mail"></span>
+                        <input class="uk-input" name="email"
+                               placeholder="Ej: antoniojose@gmail.com" type="email" required>
+                    </div>
                 </div>
+
             </div>
 
             <div class="uk-margin">
                 <div class="uk-inline uk-width-1-1">
-                    <span class="uk-form-icon" uk-icon="icon: user"></span>
-                    <input class="uk-input" name="usuario"
-                           placeholder="Username" type="text" required>
+                    <label class="uk-form-label">Nombre de Usuario</label>
+                    <div class="uk-inline">
+                        <button class="uk-icon-button" uk-icon="info"></button>
+                        <div uk-dropdown >
+                            <span class="uk-text-muted">Para poder acceder a la aplicación y compartir noticias.</span>
+                        </div>
+                    </div>
+                    <div class="uk-inline uk-width-1-1">
+                        <span class="uk-form-icon" uk-icon="icon: user"></span>
+                        <input class="uk-input" name="usuario"
+                               placeholder="Ej: antonio_jose" type="text" required>
+                    </div>
                 </div>
             </div>
 
             <div class="uk-margin ">
                 <div class="uk-inline uk-width-1-1">
-                    <span class="uk-form-icon" uk-icon="icon: lock"></span>
-                    <input class="uk-input" type="password" name="password"
-                           placeholder="Password" required>
+                    <label class="uk-form-label">Contraseña</label>
+                    <div class="uk-inline">
+                        <button class="uk-icon-button" uk-icon="info"></button>
+                        <div uk-dropdown >
+                            <span class="uk-text-muted">Para poder acceder a la aplicación.</span>
+                        </div>
+                    </div>
+                    <div class="uk-inline uk-width-1-1">
+                        <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                        <input class="uk-input" type="password" name="password"
+                               placeholder="Ej: Contraseña" required>
+                    </div>
                 </div>
             </div>
 
