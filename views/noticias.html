@@ -22,28 +22,9 @@
 
         <div class="uk-inline uk-width-1-1 uk-align-center">
             <div>
-                <form method="get" action="/noticias" class="uk-grid uk-margin">
-                    <div class="uk-width-1-2">
-                        <label class="uk-form-label">
-                            Título
-                        </label>
-                        <input class="uk-input"
-                               name="titulo"
-                               type="search" placeholder="Buscar título">
-                    </div>
-                    <div id="btnFilter" class="uk-width-1-2">
-                        <!--<a onclick="habilitarFiltroAutor()"uk-tooltip="Añadir filtro">-->
-                            <!--<span data-uk-icon="plus-square-o"-->
-                                  <!--class="uk-margin-small-right">-->
-                        <!--</span>-->
-                        <!--</a>-->
-                        <button class="uk-icon-button" uk-icon="plus" title="Añadir filtro" onclick="habilitarFiltroAutor()"></button>
-                        <!--<a href=""-->
-                           <!--class="uk-icon-button uk-button-default">-->
-                        <!--<span data-uk-icon="plus"-->
-                              <!--class="uk-margin">-->
-                        <!--</span>-->
-                        <!--</a>-->
+                <form method="get" action="/noticias" class="uk-margin uk-grid">
+                    <div id="btnFilter" class="uk-align-center">
+                        <button class="uk-icon-button" uk-icon="plus" title="Añadir filtro" onclick="habilitarFiltroAutor(); return false;"></button>
                     </div>
                     <div id="autorFilter" class="uk-width-1-2 uk-hidden">
                         <label class="uk-form-label">
@@ -53,6 +34,15 @@
                                name="usuario"
                                type="search" placeholder="Buscar autor">
                     </div>
+                    <div class="uk-width-expand">
+                        <label class="uk-form-label">
+                            Título
+                        </label>
+                        <input class="uk-input"
+                               name="titulo"
+                               type="search" placeholder="Buscar título">
+                    </div>
+
                     <div class="uk-width-1-1">
                         <button class="uk-button uk-button-secondary uk-width-1-1 uk-margin-small-top"
                                 type="submit"><span uk-search-icon></span>
@@ -69,11 +59,9 @@
             {{#if numero}}
             {{#each noticias}}
             <div >
-                <div style="height:400px;"
-                     class="uk-card uk-card-default uk-card-small uk-grid uk-grid-collapse uk-child-width-1-2 uk-margin uk-card-hover">
+                <div class="uk-card uk-card-default uk-card-small uk-grid uk-grid-collapse uk-child-width-1-2 uk-margin uk-card-hover uk-responsive-height">
                     <div class="uk-card-media-left uk-cover-container">
-                        <img style="height:400px;"
-                             class="uk-cover" src="/subidas/{{ _id }}.png">
+                        <img class="uk-cover" src="/subidas/{{ _id }}.png">
                     </div>
                     <div>
                         <div class="uk-card-body">
@@ -122,7 +110,6 @@
                                                 <a href="/noticia/{{ _id }}/modificar" ><span class="uk-icon-button" uk-icon="pencil" title="Editar"></span></a>
                                                 <a href="/eliminar/{{ _id }}/noticia" ><span class="uk-icon-button" uk-icon="trash" title="Eliminar"></span></a>
                                             </div>
-                                            </ul>
                                         </div>
                                         {{/if}}
                                     </div>
@@ -147,10 +134,6 @@
 <script>
     function habilitarFiltroAutor() {
         document.getElementById("autorFilter").classList.remove("uk-hidden");
-        document.getElementById("btnFilter").classList.add("uk-hidden")
-    }
-
-    function mostrarOpciones() {
-
+        document.getElementById("btnFilter").classList.add("uk-hidden");
     }
 </script>
