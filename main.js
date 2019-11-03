@@ -26,8 +26,6 @@ server.method({
     },
     options: {}
 });
-
-// Declarar metodos comunes
 server.method({
     name: 'getNodemailer',
     method: () => {

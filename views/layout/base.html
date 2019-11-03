@@ -42,7 +42,7 @@
 
 
 <!--HEADER-->
-<header class="uk-box-shadow-small">
+<header class="uk-box-shadow-small"  style="background: white">
     <div class="uk-container uk-container-expand">
         <nav class="uk-navbar" data-uk-navbar>
             <div class="uk-navbar-left">
@@ -188,14 +188,11 @@
             </li>
             {{/usuarioAutenticado}}
             <li class="uk-nav-header">Secciones</li>
-            <li class="uk-parent"><a href="/noticias">Portada</a></li>
-            <li class="uk-parent"><a href="/noticias?categoria=nacional" name="categoria">Nacional</a></li>
-            <li class="uk-parent"><a href="/noticias?categoria=internacional" name="categoria">Internacional</a></li>
+            <li class="uk-parent"><a href="/noticias" name="categoria">Portada</a></li>
             <li class="uk-parent"><a href="/noticias?categoria=politica" name="categoria">Politica</a></li>
             <li class="uk-parent"><a href="/noticias?categoria=economia" name="categoria">Economía</a></li>
             <li class="uk-parent"><a href="/noticias?categoria=sociedad" name="categoria">Sociedad</a></li>
-            <li class="uk-parent"><a href="/noticias?categoria=cultura" name="categoria">Cultura</a></li>
-            <li class="uk-parent"><a href="/noticias?categoria=ciencia" name="categoria">Ciencia</a></li>
+            <li class="uk-parent"><a href="/noticias?categoria=cultura" name="categoria">Cultura y ciencia</a></li>
             <li class="uk-parent"><a href="/noticias?categoria=deportes" name="categoria">Deportes</a></li>
             <li class="uk-parent"><a href="/noticias?categoria=television" name="categoria">Televisión</a></li>
             <li class="uk-parent"><a href="/noticias?categoria=gente" name="categoria">Gente</a></li>
@@ -203,7 +200,6 @@
         </ul>
     </div>
 </div>
-
 
 <!--CONTENT-->
 {{{content}}}

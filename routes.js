@@ -1,6 +1,6 @@
 module.exports = {
     name: 'MiRouter',
-utilSubirFichero : async (binario, nombre, extension) => {
+    utilSubirFichero : async (binario, nombre, extension) => {
         return new Promise((resolve, reject) => {
             nombre = nombre + "." + extension;
             require('fs').writeFile('./public/subidas/'+nombre, binario, err => {
@@ -249,7 +249,7 @@ utilSubirFichero : async (binario, nombre, extension) => {
                         .then((db) => repositorio.eliminarComentario(db, criterioComentario))
                         .then((resultado) => {
                             if (resultado == null) {
-                                return h.redirect('/noticias' + '?mensaje=Error al eliminar la noticia.&tipoMensaje=danger')
+                                return h.redirect('/misnoticias' + '?mensaje=Error al eliminar la noticia.&tipoMensaje=danger')
                             }
                         })
 
@@ -257,7 +257,7 @@ utilSubirFichero : async (binario, nombre, extension) => {
                         .then((db) => repositorio.eliminarNoticiaCompartida(db, criterioCompartido))
                         .then((resultado) => {
                             if (resultado == null) {
-                                return h.redirect('/noticias' + '?mensaje=Error al eliminar la noticia.&tipoMensaje=danger')
+                                return h.redirect('/misnoticias' + '?mensaje=Error al eliminar la noticia.&tipoMensaje=danger')
                             }
                         })
 
@@ -265,11 +265,11 @@ utilSubirFichero : async (binario, nombre, extension) => {
                         .then((db) => repositorio.eliminarNoticia(db, criterio))
                         .then((resultado) => {
                             if (resultado == null) {
-                                return h.redirect('/noticias' + '?mensaje=Error al eliminar la noticia.&tipoMensaje=danger')
+                                return h.redirect('/misnoticias' + '?mensaje=Error al eliminar la noticia.&tipoMensaje=danger')
                             }
                         })
 
-                    return h.redirect('/noticias' + '?mensaje=Noticia eliminada correctamente.&tipoMensaje=success')
+                    return h.redirect('/misnoticias' + '?mensaje=Noticia eliminada correctamente.&tipoMensaje=success')
                 }
             },
             {
@@ -563,7 +563,7 @@ utilSubirFichero : async (binario, nombre, extension) => {
 
                             pgUltima = noticiasEjemplo.total/5;
                             // Si excede sumar 1 y quitar los decimales
-                            if (pgUltima % 5 > 0 ){
+                            if (pgUltima > 1 && pgUltima % 5 > 0 ){
                                 pgUltima = Math.trunc(pgUltima);
                                 pgUltima = pgUltima+1;
                             }

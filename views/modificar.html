@@ -32,17 +32,14 @@
                         <label class="uk-form-label">Categoría</label>
                         <select class="uk-select" name="categoria"
                                 required="true">
-                            <option id="ciencia" value="ciencia">Ciencia</option>
-                            <option id="cultura" value="cultura">Cultura</option>
-                            <option id="deportes" value="deportes">Deportes</option>
-                            <option id="economia" value="economia">Economía</option>
-                            <option id="gente" value="gente">Gente</option>
-                            <option id="internacional" value="internacional">Internacional</option>
-                            <option id="nacional" value="nacional">Nacional</option>
-                            <option id="opinion" value="opinion">Opinión</option>
-                            <option id="politica" value="politica">Política</option>
-                            <option id="sociedad" value="sociedad">Sociedad</option>
-                            <option id="television" value="television">Televisión</option>
+                            <option value="politica">Política</option>
+                            <option value="economia">Economía</option>
+                            <option value="sociedad">Sociedad</option>
+                            <option value="cultura">Cultura y ciencia</option>
+                            <option value="deportes">Deportes</option>
+                            <option value="television">Televisión</option>
+                            <option value="gente">Gente</option>
+                            <option value="opinion">Opinión</option>
                         </select>
                     </div>
                     <script>
@@ -69,11 +66,11 @@
                 </div>
 
                 <div class="uk-margin">
-                    <label class="uk-form-label">Cambiar foto</label>
-                    <div uk-form-custom="target: true">
-                        <input type="file" name="foto" accept="image/*">
+                    <label class="uk-form-label"><strong>Foto</strong></label>
+                    <div uk-form-custom="target: true" class="uk-width-expand">
+                        <input type="file" name="foto" accept="image/png">
                         <input class="uk-input" type="text"
-                               placeholder="Selecciona fichero">
+                               placeholder="Selecciona fichero o arrástralo aquí">
                     </div>
                 </div>
 

@@ -1,23 +1,46 @@
 <section class="uk-section uk-section-default">
     <div class="uk-container">
 
+        <p><strong>{{noticias.length}} resultados</strong></p>
+
         <!-- sin incluir uk-grid no va el grid -->
-        <div class="uk-child-width-1-2@m" uk-grid >
+        <div class="uk-child-width-1-2@m" uk-grid>
 
             {{#if numero}}
             {{#each noticias}}
             <div >
-                <div style="height:400px;"
-                     class="uk-card uk-card-default uk-grid uk-grid-collapse uk-child-width-1-2 uk-margin">
+                <div class="uk-card uk-card-default uk-card-small uk-grid uk-grid-collapse uk-child-width-1-2 uk-margin uk-card-hover uk-responsive-height">
                     <div class="uk-card-media-left uk-cover-container">
-                        <img style="height:350px;"
-                             class="uk-cover" src="/subidas/{{ _id }}.png">
+                        <img class="uk-cover" src="/subidas/{{ _id }}.png">
                     </div>
                     <div>
                         <div class="uk-card-body">
-                            <h3 class="uk-card-title">{{ titulo }}</h3>
+                            {{#ifEquals categoria "politica" }}
+                            <div class="uk-card-badge "><img style="height:40px;" src="/images/politica.png" title="Política"/></div>
+                            {{/ifEquals}}
+                            {{#ifEquals categoria "economia" }}
+                            <div class="uk-card-badge "><img style="height:40px;" src="/images/euro.png" title="Economía"/></div>
+                            {{/ifEquals}}
+                            {{#ifEquals categoria "sociedad" }}
+                            <div class="uk-card-badge "><img style="height:40px;" src="/images/society.png" title="Sociedad"/></div>
+                            {{/ifEquals}}
+                            {{#ifEquals categoria "cultura" }}
+                            <div class="uk-card-badge "><img style="height:40px;" src="/images/atom.png" title="Cultura y ciencia"/></div>
+                            {{/ifEquals}}
+                            {{#ifEquals categoria "deportes" }}
+                            <div class="uk-card-badge "><img style="height:40px;" src="/images/football.png" title="Deportes"/></div>
+                            {{/ifEquals}}
+                            {{#ifEquals categoria "television" }}
+                            <div class="uk-card-badge "><img style="height:40px;" src="/images/television.png" title="Televisión"/></div>
+                            {{/ifEquals}}
+                            {{#ifEquals categoria "gente" }}
+                            <div class="uk-card-badge "><img style="height:40px;" src="/images/heart.png" title="Gente"/></div>
+                            {{/ifEquals}}
+                            {{#ifEquals categoria "opinion" }}
+                            <div class="uk-card-badge "><img style="height:40px;" src="/images/opinion.png" title="Opinión"/></div>
+                            {{/ifEquals}}
+                            <h3 class="uk-card-title uk-margin-large-top">{{ titulo }}</h3>
                             <p>{{ subtitulo }}.</p>
-                            <p><strong>Autor: {{ usuario }}</strong></p>
                             <div class="uk-grid uk-margin uk-child-width-1-2">
                                 <div class="uk-width-2-5 ">
                                     <a class="uk-button uk-button-primary uk-button-small"
@@ -28,11 +51,16 @@
                                 <div class="uk-width-3-5@m">
                                     <div>
                                         {{#if usuarioAutenticado}}
-                                        <a href="/noticia/{{ _id }}/compartir" class="uk-margin-small-right" ><span uk-icon="social" title="Compartir"></span></a>
+                                        <a href="/noticia/{{ _id }}/compartir" class="uk-margin-small-right" ><span  uk-icon="social" title="Compartir"></span></a>
                                         {{/if}}
                                         {{#if adminNoticia }}
-                                        <a href="/noticia/{{ _id }}/modificar" class="uk-margin-small-right" ><span  uk-icon="pencil" title="Editar"></span></a>
-                                        <a href="/eliminar/{{ _id }}/noticia" ><span uk-icon="trash" title="Eliminar"></span></a>
+                                        <div class="uk-inline">
+                                            <button class="uk-icon-button" uk-icon="more"></button>
+                                            <div uk-dropdown style="padding: 0px; min-width: 0px">
+                                                <a href="/noticia/{{ _id }}/modificar" ><span class="uk-icon-button uk-margin-small-bottom" uk-icon="pencil" title="Editar"></span></a>
+                                                <a href="/eliminar/{{ _id }}/noticia" ><span class="uk-icon-button" uk-icon="trash" title="Eliminar"></span></a>
+                                            </div>
+                                        </div>
                                         {{/if}}
                                     </div>
                                 </div>
@@ -50,5 +78,17 @@
             </div>
             {{/numero}}
         </div>
+
+        <a class="uk-button uk-button-secondary uk-width-expand uk-margin-medium-top" href="#top" uk-scroll>Subir</a>
+
     </div>
 </section>
+
+<script>
+    window.onload = function() {
+        //Al cargar la pagina se aplica el atributo "uk-sticky" al header para que se mantenga fijo al hacer scroll
+        var att = document.createAttribute("uk-sticky");       // Create a "class" attribute
+        att.value = "top:200";                                 // Set the value of the class attribute
+        document.getElementsByTagName("header")[0].setAttributeNode(att);
+    };
+</script>

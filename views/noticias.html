@@ -1,14 +1,11 @@
 <nav class="uk-navbar-container" uk-navbar>
     <div class="uk-navbar-center uk-visible@m">
         <ul class="uk-navbar-nav">
-            <li class="uk-active"><a href="/noticias">Portada</a></li>
-            <li class="uk-parent"><a href="/noticias?categoria=nacional" name="categoria">Nacional</a></li>
-            <li class="uk-parent"><a href="/noticias?categoria=internacional" name="categoria">Internacional</a></li>
-            <li class="uk-parent"><a href="/noticias?categoria=politica" name="categoria">Politica</a></li>
+            <li class="uk-parent"><a href="/noticias" name="categoria">Portada</a></li>
+            <li class="uk-parent"><a href="/noticias?categoria=politica" name="categoria">Política</a></li>
             <li class="uk-parent"><a href="/noticias?categoria=economia" name="categoria">Economía</a></li>
             <li class="uk-parent"><a href="/noticias?categoria=sociedad" name="categoria">Sociedad</a></li>
-            <li class="uk-parent"><a href="/noticias?categoria=cultura" name="categoria">Cultura</a></li>
-            <li class="uk-parent"><a href="/noticias?categoria=ciencia" name="categoria">Ciencia</a></li>
+            <li class="uk-parent"><a href="/noticias?categoria=cultura" name="categoria">Cultura y ciencia</a></li>
             <li class="uk-parent"><a href="/noticias?categoria=deportes" name="categoria">Deportes</a></li>
             <li class="uk-parent"><a href="/noticias?categoria=television" name="categoria">Televisión</a></li>
             <li class="uk-parent"><a href="/noticias?categoria=gente" name="categoria">Gente</a></li>
@@ -20,10 +17,10 @@
 <section class="uk-section uk-section-default">
     <div class="uk-container">
 
-        <div class="uk-inline uk-width-1-1 uk-align-center">
+        <div class="uk-inline uk-width-1-1 uk-align-center uk-margin-small-bottom">
             <div>
-                <form method="get" action="/noticias" class="uk-margin uk-grid">
-                    <div id="btnFilter" class="uk-align-center">
+                <form method="get" action="/noticias" class="uk-margin uk-grid" style="align-items: flex-end">
+                    <div id="btnFilter" class="uk-align-center" style="margin: initial">
                         <button class="uk-icon-button" uk-icon="plus" title="Añadir filtro" onclick="habilitarFiltroAutor(); return false;"></button>
                     </div>
                     <div id="autorFilter" class="uk-width-1-2 uk-hidden">
@@ -34,7 +31,7 @@
                                name="usuario"
                                type="search" placeholder="Buscar autor">
                     </div>
-                    <div class="uk-width-expand">
+                    <div class="uk-width-expand" style="padding-left: 10px">
                         <label class="uk-form-label">
                             Título
                         </label>
@@ -53,8 +50,10 @@
             </div>
         </div>
 
+        <p><strong>{{noticias.length}} resultados</strong></p>
+
         <!-- sin incluir uk-grid no va el grid -->
-        <div class="uk-child-width-1-2@m" uk-grid >
+        <div class="uk-child-width-1-2@m" uk-grid>
 
             {{#if numero}}
             {{#each noticias}}
@@ -71,20 +70,20 @@
                             {{#ifEquals categoria "economia" }}
                                 <div class="uk-card-badge "><img style="height:40px;" src="/images/euro.png" title="Economía"/></div>
                             {{/ifEquals}}
-                            {{#ifEquals categoria "deportes" }}
-                                <div class="uk-card-badge "><img style="height:40px;" src="/images/corriendo.png" title="Deportes"/></div>
-                            {{/ifEquals}}
-                            {{#ifEquals categoria "nacional" }}
-                                <div class="uk-card-badge "><img style="height:40px;" src="/images/espana.png" title="Nacional"/></div>
-                            {{/ifEquals}}
-                            {{#ifEquals categoria "internacional" }}
-                                <div class="uk-card-badge "><img style="height:40px;" src="/images/tierra.png" title="Internacional"/></div>
-                            {{/ifEquals}}
                             {{#ifEquals categoria "sociedad" }}
-                                <div class="uk-card-badge "><img style="height:40px;" src="/images/corporacion.png" title="Sociedad"/></div>
+                            <div class="uk-card-badge "><img style="height:40px;" src="/images/society.png" title="Sociedad"/></div>
+                            {{/ifEquals}}
+                            {{#ifEquals categoria "cultura" }}
+                            <div class="uk-card-badge "><img style="height:40px;" src="/images/atom.png" title="Cultura y ciencia"/></div>
+                            {{/ifEquals}}
+                            {{#ifEquals categoria "deportes" }}
+                                <div class="uk-card-badge "><img style="height:40px;" src="/images/football.png" title="Deportes"/></div>
                             {{/ifEquals}}
                             {{#ifEquals categoria "television" }}
                                 <div class="uk-card-badge "><img style="height:40px;" src="/images/television.png" title="Televisión"/></div>
+                            {{/ifEquals}}
+                            {{#ifEquals categoria "gente" }}
+                            <div class="uk-card-badge "><img style="height:40px;" src="/images/heart.png" title="Gente"/></div>
                             {{/ifEquals}}
                             {{#ifEquals categoria "opinion" }}
                                 <div class="uk-card-badge "><img style="height:40px;" src="/images/opinion.png" title="Opinión"/></div>
@@ -106,8 +105,8 @@
                                         {{#if adminNoticia }}
                                         <div class="uk-inline">
                                             <button class="uk-icon-button" uk-icon="more"></button>
-                                            <div uk-dropdown >
-                                                <a href="/noticia/{{ _id }}/modificar" ><span class="uk-icon-button" uk-icon="pencil" title="Editar"></span></a>
+                                            <div uk-dropdown style="padding: 0px; min-width: 0px">
+                                                <a href="/noticia/{{ _id }}/modificar" ><span class="uk-icon-button uk-margin-small-bottom" uk-icon="pencil" title="Editar"></span></a>
                                                 <a href="/eliminar/{{ _id }}/noticia" ><span class="uk-icon-button" uk-icon="trash" title="Eliminar"></span></a>
                                             </div>
                                         </div>
@@ -128,10 +127,19 @@
             </div>
             {{/numero}}
         </div>
+
+        <a class="uk-button uk-button-secondary uk-width-expand uk-margin-medium-top" href="#top" uk-scroll>Subir</a>
+
     </div>
 </section>
 
 <script>
+    window.onload = function() {
+        //Al cargar la pagina se aplica el atributo "uk-sticky" al header para que se mantenga fijo al hacer scroll
+        var att = document.createAttribute("uk-sticky");       // Create a "class" attribute
+        att.value = "top:200";                                 // Set the value of the class attribute
+        document.getElementsByTagName("header")[0].setAttributeNode(att);
+    };
     function habilitarFiltroAutor() {
         document.getElementById("autorFilter").classList.remove("uk-hidden");
         document.getElementById("btnFilter").classList.add("uk-hidden");
