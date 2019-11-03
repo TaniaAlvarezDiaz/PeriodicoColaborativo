@@ -792,6 +792,36 @@ module.exports = {
                     if(user == ""){
                         user = null;
                     }
+
+                    let d =  noticiaEjemplo.fecha.split("-");
+                    var cad = "dia " + d[2] + " de ";
+                    if(d[1] == '01')
+                        cad += "Enero de ";
+                    else if(d[1] == '02')
+                        cad += "Febrero de ";
+                    else if(d[1] == '03')
+                        cad += "Marzo de ";
+                    else if(d[1] == '04')
+                        cad += "Abril de ";
+                    else if(d[1] == '05')
+                        cad += "Mayo de ";
+                    else if(d[1] == '06')
+                        cad += "Junio de ";
+                    else if(d[1] == '07')
+                        cad += "Julio de ";
+                    else if(d[1] == '08')
+                        cad += "Agosto de ";
+                    else if(d[1] == '09')
+                        cad += "Septiembre de ";
+                    else if(d[1] == '10')
+                        cad += "Octubre de ";
+                    else if(d[1] == '11')
+                        cad += "Noviembre de ";
+                    else if(d[1] == '12')
+                        cad += "Dociembre de ";
+                    cad += d[0]
+                    noticiaEjemplo.fecha = cad
+
                     return h.view('detalle',
                         {
                             usuarioAutenticado: user,
