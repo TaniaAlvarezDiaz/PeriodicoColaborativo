@@ -35,12 +35,21 @@ server.method({
 });
 
 
+
 const iniciarServer = async () => {
     try {
         // Registrar el Inter antes de usar directory en routes
         await server.register(Inert);
         await server.register(Vision);
         await server.register(Cookie);
+        await server.register({
+            plugin: require('hapi-server-session'),
+            options: {
+                cookie: {
+                    isSecure: false, // never set to false in production
+                },
+            },
+        });
 
         //Configurar seguridad, podemos tener varias estrategias
         //auth-registrado es el nombre que le damos a la estrategia de autenticación

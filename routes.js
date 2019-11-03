@@ -135,7 +135,9 @@ module.exports = {
                         {
                             usuarioAutenticado: req.state["session-id"].usuario,
                             usuarios: lstUsuarios,
-                            noticia: noticia
+                            noticia: noticia,
+                            numMisNoticias: req.session.numMisNoticias,
+                            numNoticiasCompartidas: req.session.numNoticiasCompartidas
                         },
                         { layout: 'base'} );
                 }
@@ -198,13 +200,18 @@ module.exports = {
                             {
                                 usuarioAutenticado: req.state["session-id"].usuario,
                                 noticias: lstNoticias,
-                                numero: lstNoticias.length
+                                numero: lstNoticias.length,
+                                numMisNoticias: req.session.numMisNoticias,
+                                numNoticiasCompartidas: req.session.numNoticiasCompartidas
                             }, {layout: 'base'});
                     }
+
                     return h.view('noticiascompartidas',
                         {
                             usuarioAutenticado: req.state["session-id"].usuario,
-                            noticias: lstNoticias
+                            noticias: lstNoticias,
+                            numMisNoticias: req.session.numMisNoticias,
+                            numNoticiasCompartidas: req.session.numNoticiasCompartidas
                         }, { layout: 'base'} );
 
                 }
@@ -228,7 +235,9 @@ module.exports = {
                     return h.view('misdatos',
                         {
                             usuario: usuario,
-                            usuarioAutenticado: req.state["session-id"].usuario
+                            usuarioAutenticado: req.state["session-id"].usuario,
+                            numMisNoticias: req.session.numMisNoticias,
+                            numNoticiasCompartidas: req.session.numNoticiasCompartidas
                         },
                         { layout: 'base'} );
                 }
@@ -366,7 +375,9 @@ module.exports = {
                     return h.view('modificar',
                         {
                             noticia: noticia,
-                            usuarioAutenticado: req.state["session-id"].usuario
+                            usuarioAutenticado: req.state["session-id"].usuario,
+                            numMisNoticias: req.session.numMisNoticias,
+                            numNoticiasCompartidas: req.session.numNoticiasCompartidas
                         },
                         { layout: 'base'} );
                 }
@@ -440,7 +451,9 @@ module.exports = {
                     return h.view('publicar',
                         {
                             usuarioAutenticado: req.state["session-id"].usuario,
-                            hoy : fecha
+                            hoy : fecha,
+                            numMisNoticias: req.session.numMisNoticias,
+                            numNoticiasCompartidas: req.session.numNoticiasCompartidas
                         },
                         { layout: 'base'});
                 }
@@ -465,8 +478,9 @@ module.exports = {
                 method: 'GET',
                 path: '/login',
                 handler: async (req, h) => {
+
                     return h.view('login',
-                        { },
+                        {  },
                         { layout: 'base'});
                 }
             },
@@ -505,10 +519,12 @@ module.exports = {
                                     usuario: usuarios[0].usuario,
                                     secreto : "secreto"
                                 });
+
                                 respuesta = h.redirect('/misnoticias')
 
                             }
                         })
+
                     return respuesta;
                 }
             },
@@ -566,12 +582,35 @@ module.exports = {
                 },
                 handler: async (req, h) => {
 
+                    var misNoticias;
+                    var noticiasCompartidas;
+
+                    //Obtener num mis noticias
+                    var criterio = { "usuario" : req.state["session-id"].usuario };
+                    await repositorio.conexion()
+                        .then((db) => repositorio.obtenerNoticias(db, criterio))
+                        .then((noticias) => {
+                            misNoticias = noticias;
+                        })
+
+                    //Obtener num noticias compartidas
+                    criterio = { "usuarioDestino" : req.state["session-id"].usuario};
+                    await repositorio.conexion()
+                        .then((db) => repositorio.obtenerNoticiasCompartidas(db, criterio))
+                        .then((noticias) => {
+                            //Cada objeto tiene el id de la noticia compartida
+                            noticiasCompartidas = noticias;
+                        })
+
+                    req.session.numMisNoticias = misNoticias.length;
+                    req.session.numNoticiasCompartidas = noticiasCompartidas.length;
+
                     var pg = parseInt(req.query.pg); // Es String !!!
                     if ( req.query.pg == null){ // Puede no venir el param
                         pg = 1;
                     }
 
-                    var criterio = { "usuario" : req.state["session-id"].usuario };
+                    criterio = { "usuario" : req.state["session-id"].usuario };
                     // cookieAuth
 
                     await repositorio.conexion()
@@ -613,11 +652,14 @@ module.exports = {
                             paginas.push({valor: i});
                         }
                     }
+
                     return h.view('misnoticias',
                         {
                             noticias: noticiasEjemplo,
                             usuarioAutenticado: req.state["session-id"].usuario,
-                            paginas : paginas
+                            paginas : paginas,
+                            numMisNoticias: req.session.numMisNoticias,
+                            numNoticiasCompartidas: req.session.numNoticiasCompartidas
                         },
                         { layout: 'base'} );
                 }
@@ -693,14 +735,19 @@ module.exports = {
                             {
                                 usuarioAutenticado: user,
                                 noticias: noticiasEjemplo,
-                                numero: noticiasEjemplo.length
+                                numero: noticiasEjemplo.length,
+                                numMisNoticias: req.session.numMisNoticias,
+                                numNoticiasCompartidas: req.session.numNoticiasCompartidas
+
                             }, { layout: 'base'} );
                     }
                     else{
                         return h.view('noticias',
                             {
                                 usuarioAutenticado: user,
-                                noticias: noticiasEjemplo
+                                noticias: noticiasEjemplo,
+                                numMisNoticias: req.session.numMisNoticias,
+                                numNoticiasCompartidas: req.session.numNoticiasCompartidas
                             }, { layout: 'base'} );
                     }
                 }
@@ -829,6 +876,8 @@ module.exports = {
                             noticiaId: require("mongodb").ObjectID(req.params.id),
                             comentarios: comentariosEjemplo,
                             numeroComentarios: comentariosEjemplo.length,
+                            numMisNoticias: req.session.numMisNoticias,
+                            numNoticiasCompartidas: req.session.numNoticiasCompartidas
                         }, { layout: 'base'});
                 }
             },
