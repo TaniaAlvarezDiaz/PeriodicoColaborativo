@@ -580,6 +580,10 @@ module.exports = {
                             noticiasEjemplo = noticias;
 
                             pgUltima = noticiasEjemplo.total/5;
+
+                            if (pgUltima < 1)
+                                pgUltima = 1;
+
                             // Si excede sumar 1 y quitar los decimales
                             if (pgUltima > 1 && pgUltima % 5 > 0 ){
                                 pgUltima = Math.trunc(pgUltima);

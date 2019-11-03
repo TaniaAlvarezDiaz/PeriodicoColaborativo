@@ -50,7 +50,7 @@
             </div>
         </div>
 
-        <p><strong>{{noticias.length}} resultados</strong></p>
+        <p><strong>{{noticias.length}} resultado/s</strong></p>
 
         <!-- sin incluir uk-grid no va el grid -->
         <div class="uk-child-width-1-2@m" uk-grid>
@@ -59,7 +59,7 @@
             {{#each noticias}}
             <div >
                 {{#ifEquals first "true" }}
-                    <div style="height:400px; background-color: #F9B774"
+                    <div style="height:400px; background-color: #f6f99e"
                          class="uk-card uk-card-default uk-card-small uk-grid uk-grid-collapse uk-child-width-1-2 uk-margin uk-card-hover">
                 {{/ifEquals}}
                 {{#ifEquals first "false"}}
@@ -113,7 +113,7 @@
                                         {{#if adminNoticia }}
                                         <div class="uk-inline">
                                             <button class="uk-icon-button" uk-icon="more"></button>
-                                            <div uk-dropdown style="padding: 0px; min-width: 0px">
+                                            <div uk-dropdown style="padding: 0px; min-width: 0px; background: rgba(255,255,255,0); box-shadow: 0 0px 0px">
                                                 <a href="/noticia/{{ _id }}/modificar" ><span class="uk-icon-button uk-margin-small-bottom" uk-icon="pencil" title="Editar"></span></a>
                                                 <a href="/eliminar/{{ _id }}/noticia" ><span class="uk-icon-button" uk-icon="trash" title="Eliminar"></span></a>
                                             </div>
@@ -139,6 +139,7 @@
 
         <a class="uk-button uk-button-secondary uk-width-expand uk-margin-medium-top" href="#top" uk-scroll>Subir</a>
 
+        </div>
     </div>
 </section>
 
