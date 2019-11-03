@@ -13,8 +13,14 @@
                 <tbody>
                 {{#each noticias}}
                 <tr>
-                    <td >{{ titulo }}</td>
-                    <td >{{ categoria }}</td>
+                    {{#ifEquals first "true" }}
+                        <td class="uk-text-bold">{{ titulo }}</td>
+                        <td class="uk-text-bold">{{ categoria }}</td>
+                    {{/ifEquals}}
+                    {{#ifEquals first "false" }}
+                        <td >{{ titulo }}</td>
+                        <td >{{ categoria }}</td>
+                    {{/ifEquals}}
                     <td>
                         <div class="uk-flex">
                         <a class="uk-link uk-width-1-3" href="/noticia/{{_id}}/compartir">

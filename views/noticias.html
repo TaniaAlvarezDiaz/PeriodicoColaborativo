@@ -8,7 +8,6 @@
             <li class="uk-parent"><a href="/noticias?categoria=cultura" name="categoria">Cultura y ciencia</a></li>
             <li class="uk-parent"><a href="/noticias?categoria=deportes" name="categoria">Deportes</a></li>
             <li class="uk-parent"><a href="/noticias?categoria=television" name="categoria">Televisión</a></li>
-            <li class="uk-parent"><a href="/noticias?categoria=gente" name="categoria">Gente</a></li>
             <li class="uk-parent"><a href="/noticias?categoria=opinion" name="categoria">Opinión</a></li>
         </ul>
     </div>
@@ -31,6 +30,7 @@
                                name="usuario"
                                type="search" placeholder="Buscar autor">
                     </div>
+
                     <div class="uk-width-expand" style="padding-left: 10px">
                         <label class="uk-form-label">
                             Título
@@ -58,9 +58,17 @@
             {{#if numero}}
             {{#each noticias}}
             <div >
-                <div class="uk-card uk-card-default uk-card-small uk-grid uk-grid-collapse uk-child-width-1-2 uk-margin uk-card-hover uk-responsive-height">
+                {{#ifEquals first "true" }}
+                    <div style="height:400px; background-color: #F9B774"
+                         class="uk-card uk-card-default uk-card-small uk-grid uk-grid-collapse uk-child-width-1-2 uk-margin uk-card-hover">
+                {{/ifEquals}}
+                {{#ifEquals first "false"}}
+                    <div style="height:400px;"
+                             class="uk-card uk-card-default uk-card-small uk-grid uk-grid-collapse uk-child-width-1-2 uk-margin uk-card-hover">
+                {{/ifEquals}}
                     <div class="uk-card-media-left uk-cover-container">
-                        <img class="uk-cover" src="/subidas/{{ _id }}.png">
+                        <img style="height:400px;"
+                             class="uk-cover" src="/subidas/{{ _id }}.png">
                     </div>
                     <div>
                         <div class="uk-card-body">
@@ -92,7 +100,7 @@
                             <p>{{ subtitulo }}.</p>
                             <div class="uk-grid uk-margin uk-child-width-1-2">
                                 <div class="uk-width-2-5 ">
-                                    <a class="uk-button uk-button-primary uk-button-small"
+                                    <a class="uk-button uk-button-primary uk-button-small visitado"
                                        href="/detalle/{{ _id }}">
                                         Más...
                                     </a>
@@ -109,6 +117,7 @@
                                                 <a href="/noticia/{{ _id }}/modificar" ><span class="uk-icon-button uk-margin-small-bottom" uk-icon="pencil" title="Editar"></span></a>
                                                 <a href="/eliminar/{{ _id }}/noticia" ><span class="uk-icon-button" uk-icon="trash" title="Eliminar"></span></a>
                                             </div>
+                                            </ul>
                                         </div>
                                         {{/if}}
                                     </div>
@@ -142,6 +151,10 @@
     };
     function habilitarFiltroAutor() {
         document.getElementById("autorFilter").classList.remove("uk-hidden");
-        document.getElementById("btnFilter").classList.add("uk-hidden");
+        document.getElementById("btnFilter").classList.add("uk-hidden")
+    }
+
+    function mostrarOpciones() {
+
     }
 </script>
