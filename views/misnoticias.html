@@ -1,10 +1,13 @@
 <section class="uk-section">
     <div class="uk-container">
 
+        <p><strong>{{noticias.length}} resultado/s</strong></p>
+
         <div class="uk-overflow-auto">
             <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
                 <thead>
                 <tr>
+                    <th></th>
                     <th class="uk-table-expand">Titulo</th>
                     <th class="uk-width-small">Categoría</th>
                     <th class="uk-width-small">Opciones</th>
@@ -13,6 +16,7 @@
                 <tbody>
                 {{#each noticias}}
                 <tr>
+                    <td><input class="check uk-checkbox" type="checkbox" id="{{_id}}"></td>
                     {{#ifEquals first "true" }}
                         <td class="uk-text-bold">{{ titulo }}</td>
                         <td class="uk-text-bold">{{ categoria }}</td>
@@ -36,8 +40,17 @@
                     </td>
                 </tr>
                 {{/each}}
+
                 </tbody>
             </table>
+
+            <div class="uk-inline">
+                <label><input id="selectAll" class="uk-checkbox" type="checkbox" onclick="seleccionarTodo()"> Seleccionar todo</label>
+                <button style="color: #f0506e; border-color: #f0506e;" class="btn uk-button uk-button-default uk-margin-small-left" type="button" onclick="eliminarNoticias()">
+                    <span style="color: #f0506e;" data-uk-icon="trash" class="uk-margin-small-right"></span>
+                    Eliminar</button>
+            </div>
+
         </div>
 
         <ul class="uk-pagination uk-flex-center" uk-margin>
@@ -51,3 +64,28 @@
         </ul>
     </div>
 </section>
+
+<script>
+    function seleccionarTodo() {
+        var checkSelectAll = document.getElementById("selectAll");
+        var checks = document.getElementsByClassName("check");
+        if (checkSelectAll.checked == true) {
+            for (var i=0; i<checks.length; i++) {
+                checks[i].checked = true;
+            }
+        }else {
+            for (var i=0; i<checks.length; i++) {
+                checks[i].checked = false;
+            }
+        }
+    };
+    async function eliminarNoticias() {
+        var checks = document.getElementsByClassName("check")
+        for (var i=0; i<checks.length; i++) {
+            // If the checkbox is checked, remove element
+            if (checks[i].checked == true){
+                await window.location.href = '/eliminar/' + checks[i].id.toString() + '/noticia';
+            }
+        }
+    }
+</script>
